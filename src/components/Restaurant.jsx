@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import '@fontsource/bebas-neue';
 import '@fontsource-variable/open-sans';
+import useUserDataReservation from '../hooks/useUserDataReservation';
 
 const hours = [
     { id: 1, hour: '11:30' },
@@ -14,12 +15,13 @@ const hours = [
     { id: 7, hour: '14:30' },
 ];
 
-function Restaurant({ id, name, description, selectedDate }) {
+function Restaurant({ id, name, description }) {
+  const {date} = useUserDataReservation();
   return (
     <RestaurantContainer>
       <RestaurantInfo>
           <h2>
-              <Link to={`/menu/${id}?date=${selectedDate.toISOString()}`}>
+              <Link to={`/menu/${id}?date=${date.toISOString()}`}>
                   {name}
               </Link>
           </h2>

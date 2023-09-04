@@ -6,17 +6,21 @@ import MenuSelection from './components/MenuSelection';
 import OrderConfirmation from './components/OrderConfirmation';
 import './styles.css';
 import RestaurantList from "./components/RestaurantList.jsx";
+import UserDataReservationContextProvider from "./contexts/UserDataReservationContext"
 
 const rootElement = document.getElementById('app');
 createRoot(rootElement).render(
   <BrowserRouter>
+  <UserDataReservationContextProvider>
     <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/restaurants-list/:postalCode" element={<RestaurantList />} />
-      <Route path="/menu/:restaurantId" element={<MenuSelection />} />
-      <Route path="/order-confirmation" element={<OrderConfirmation />} />
+        <Route path="/" element={<App />} />
+          <Route path="/restaurants-list/:postalCode" element={<RestaurantList />} />
+          <Route path="/menu/:restaurantId" element={<MenuSelection />} />
+          <Route path="/order-confirmation" element={<OrderConfirmation />} />
     </Routes>
+  </UserDataReservationContextProvider>
   </BrowserRouter>
+
 );
 
 

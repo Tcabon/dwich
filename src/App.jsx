@@ -4,16 +4,13 @@ import RestaurantList from './components/RestaurantList';
 import './App.css';
 import Autocomplete from "react-google-autocomplete";
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import useUserDataReservation from './hooks/useUserDataReservation';
 
 function App() {
-  const [selectedDate, setSelectedDate] = useState(null);
+  const {date} = useUserDataReservation();
   const [selectedPlace, setSelectedPlace] = useState(null);
-
-  const handleDateSelect = date => {
-    console.log(date);
-    setSelectedDate(date);
-  };
-
+  const navigate = useNavigate(); 
   const getPostalCodeFromGoogleMapsObject = (apiObject) => {
     if (apiObject && apiObject.address_components && Array.isArray(apiObject.address_components)) {
       for (let i = 0; i < apiObject.address_components.length; i++) {
@@ -27,7 +24,7 @@ function App() {
   }
 
   const handlePlaceSelect = place => {
-    setSelectedPlace(getPostalCodeFromGoogleMapsObject(place));
+    navigate(`/restaurants-list/${getPostalCodeFromGoogleMapsObject(place)}`);
   }
 
   return (
@@ -35,8 +32,8 @@ function App() {
       <div>
         <h1>Dwich</h1>
         <h3>Jamais sans Dwich</h3>
-        <CalendarGrid onSelect={handleDateSelect} />
-        {selectedDate &&
+        <CalendarGrid />
+        {date &&
             <AutoCompleteContainer>
               <h3>saisissez votre ville</h3>
               <Autocomplete
@@ -47,7 +44,6 @@ function App() {
               />
             </AutoCompleteContainer>
         }
-        {selectedPlace && <RestaurantList selectedDate={selectedDate} selectedPlace={selectedPlace} />}
       </div>
     </>
   )

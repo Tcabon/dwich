@@ -9,23 +9,10 @@ function MenuItem({ id, name, price, addToCart }) {
 		setQuantity(1);
   };
 
-	const handleQuantityChange = event => {
-		setQuantity(parseInt(event.target.value));
-	}
-
   return (
     <div>
       <h3>{name}</h3>
       <p>Prix : {price} €</p>
-			<label>
-        Quantité : 
-        <input
-          type="number"
-          value={quantity}
-          onChange={handleQuantityChange}
-          min="1"
-        />
-      </label>
       <button onClick={handleAddToCart}>Ajouter au panier</button>
     </div>
   );
