@@ -4,6 +4,15 @@ import styled from 'styled-components';
 import '@fontsource/bebas-neue';
 import '@fontsource-variable/open-sans';
 
+const hours = [
+    { id: 1, hour: '11:30' },
+    { id: 2, hour: '12:00' },
+    { id: 3, hour: '12:30' },
+    { id: 4, hour: '13:00' },
+    { id: 5, hour: '13:30' },
+    { id: 6, hour: '14:00' },
+    { id: 7, hour: '14:30' },
+];
 
 function Restaurant({ id, name, description, selectedDate }) {
   return (
@@ -16,12 +25,15 @@ function Restaurant({ id, name, description, selectedDate }) {
           </h2>
           <p>{description}</p>
           <Datepicker>
-              <DateButton>
-                    11:30
-              </DateButton>
-              <DateButton>
-                  12:00
-              </DateButton>
+              {hours.map(hour => {
+                  return (
+                      <DateButton
+                          key={hour.id}
+                      >
+                          {hour.hour}
+                      </DateButton>
+                      )
+              })}
           </Datepicker>
       </RestaurantInfo>
     </RestaurantContainer>
@@ -81,6 +93,7 @@ const Datepicker = styled.div`
     display: flex;
     justify-content: flex-start;
     padding: 10px 0 10px 0;
+    overflow-x: scroll;
   
     margin-top: 10px;
     background-color: #FFF;

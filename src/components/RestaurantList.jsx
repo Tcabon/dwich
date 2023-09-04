@@ -1,8 +1,10 @@
 import React from 'react';
 import Restaurant from './Restaurant';
 import styled from 'styled-components';
+import {useParams} from "react-router-dom";
 
 function RestaurantList({ selectedDate, selectedPlace }) {
+
   const restaurants = [
     { id: 1, name: 'Les patapons', description: 'Restaurant pour petits cons avec un description plus long', postalCodes: ["75016", "92100"] },
     { id: 2, name: 'Les patapoufs', description: 'Restaurant pour grandes poufs', postalCodes: ["75015", "75007"]  },

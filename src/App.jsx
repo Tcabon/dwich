@@ -10,6 +10,7 @@ function App() {
   const [selectedPlace, setSelectedPlace] = useState(null);
 
   const handleDateSelect = date => {
+    console.log(date);
     setSelectedDate(date);
   };
 
