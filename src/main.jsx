@@ -7,6 +7,7 @@ import OrderConfirmation from './components/OrderConfirmation';
 import './styles.css';
 import RestaurantList from "./components/RestaurantList.jsx";
 import UserDataReservationContextProvider from "./contexts/UserDataReservationContext"
+import RecapBar from "./components/RecapBar.jsx";
 
 const rootElement = document.getElementById('app');
 createRoot(rootElement).render(
@@ -14,10 +15,11 @@ createRoot(rootElement).render(
   <UserDataReservationContextProvider>
     <Routes>
         <Route path="/" element={<App />} />
-          <Route path="/restaurants-list/:postalCode" element={<RestaurantList />} />
-          <Route path="/menu/:restaurantId" element={<MenuSelection />} />
-          <Route path="/order-confirmation" element={<OrderConfirmation />} />
+        <Route path="/restaurants-list/:postalCode" element={<RestaurantList />} />
+        <Route path="/menu/:restaurantId" element={<MenuSelection />} />
+        <Route path="/order-confirmation" element={<OrderConfirmation />} />
     </Routes>
+    <RecapBar />
   </UserDataReservationContextProvider>
   </BrowserRouter>
 

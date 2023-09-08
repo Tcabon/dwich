@@ -5,7 +5,7 @@ import '../styles/calendar.css';
 import styled from 'styled-components';
 import useUserDataReservation from '../hooks/useUserDataReservation';
 
-function CalendarGrid({ onSelect }) {
+function CalendarGrid() {
   const {date, handleDateChange} = useUserDataReservation();
   const today = new Date();
   const minDate = new Date();
@@ -24,7 +24,6 @@ function CalendarGrid({ onSelect }) {
             defaultActiveStartDate={new Date()}
         />
       </CalendarContainer>
-      <p>Date sélectionnée : {date.toDateString()}</p>
     </div>
   );
 }
