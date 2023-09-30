@@ -3,6 +3,6 @@ import { UserDataReservationContext } from "../contexts/UserDataReservationConte
 
 const useUserDataReservation = () => {
     return useContext(UserDataReservationContext)
-}
+};
 
-export default useUserDataReservation
+export default useUserDataReservation;

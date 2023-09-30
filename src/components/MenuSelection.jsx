@@ -2,31 +2,13 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import MenuItem from './MenuItem';
 import Total from './Total';
+import useUserDataReservation from '../hooks/useUserDataReservation';
+import useCart from '../hooks/useCart';
 
 function MenuSelection() {
+  const { removeFromCart, cartEntries, addToCart, total, CartEntries } = useCart();
   const { restaurantId } = useParams();
-  const [cart, setCart] = useState([]);
 
-  const addToCart = item => {
-    const existingItem = cart.find(cartItem => cartItem.id === item.id);
-
-    if (existingItem) {
-      const updatedCart = cart.map(cartItem => {
-        if (cartItem.id === item.id) {
-          return { ...cartItem, quantity: cartItem.quantity + item.quantity };
-        }
-        return cartItem;
-      });
-
-      setCart(updatedCart);
-    } else {
-      setCart(prevCart => [...prevCart, item]);
-    }
-  };
-
-  const removeFromCart = itemId => {
-    setCart(prevCart => prevCart.filter(item => item.id !== itemId));
-  };
 
   // Simulons des éléments de menu pour la démonstration
   const menuItems = [
@@ -43,25 +25,16 @@ function MenuSelection() {
         {menuItems.map(item => (
           <MenuItem
             key={item.id}
-            id={item.id}
-            name={item.name}
-            price={item.price}
+            item={item}
             addToCart={addToCart}
           />
         ))}
       </div>
       <div>
       <h2>Panier :</h2>
-        <ul>
-          {cart.map(item => (
-            <li key={item.id}>
-              {item.name} - {item.price} € - Quantité : {item.quantity} 
-              <button onClick={() => removeFromCart(item.id)}>Supprimer</button>
-            </li>
-          ))}
-        </ul>
+        <CartEntries />
       </div>
-      <Total cart={cart}/>
+      <Total cart={cartEntries} total={total}/>
     </div>
   );
 }

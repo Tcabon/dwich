@@ -1,21 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
 import CalendarGrid from './components/CalendarGrid'
-import RestaurantList from './components/RestaurantList';
 import './App.css';
 import Autocomplete from "react-google-autocomplete";
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import useUserDataReservation from './hooks/useUserDataReservation';
+import BookingCounter from './components/BookingCounter';
 
 function App() {
-  const {date} = useUserDataReservation();
-  const [selectedPlace, setSelectedPlace] = useState(null);
+  const {selectedDate, guestCount, setTown} = useUserDataReservation();
   const navigate = useNavigate(); 
-  const getPostalCodeFromGoogleMapsObject = (apiObject) => {
+  const getElementFromGoogleMapsObject = (apiObject, type) => {
     if (apiObject && apiObject.address_components && Array.isArray(apiObject.address_components)) {
       for (let i = 0; i < apiObject.address_components.length; i++) {
         const component = apiObject.address_components[i];
-        if (component.types.includes('postal_code')) {
+        if (component.types.includes(type)) {
           return component.long_name;
         }
       }
@@ -24,7 +23,8 @@ function App() {
   }
 
   const handlePlaceSelect = place => {
-    navigate(`/restaurants-list/${getPostalCodeFromGoogleMapsObject(place)}`);
+    setTown(getElementFromGoogleMapsObject(place, "locality"));
+    navigate(`/restaurants-list/${getElementFromGoogleMapsObject(place, "postal_code")}`);
   }
 
   return (
@@ -33,7 +33,8 @@ function App() {
         <h1>Dwich</h1>
         <h3>Jamais sans Dwich</h3>
         <CalendarGrid />
-        {date &&
+        <BookingCounter />
+        {selectedDate && guestCount &&
             <AutoCompleteContainer>
               <h3>saisissez votre ville</h3>
               <Autocomplete

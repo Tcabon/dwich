@@ -6,19 +6,24 @@ import styled from 'styled-components';
 import useUserDataReservation from '../hooks/useUserDataReservation';
 
 function CalendarGrid() {
-  const {date, handleDateChange} = useUserDataReservation();
-  const today = new Date();
+  const {selectedDate, setSelectedDate} = useUserDataReservation();
+
   const minDate = new Date();
-  minDate.setDate(minDate.getDate() + 3);
+  minDate.setDate(minDate.getDate());
   const maxDate = new Date();
   maxDate.setDate(maxDate.getDate() + 180)
+
+ const handleDateChange = (value) => {
+  setSelectedDate(value);
+ }
+
   return (
     <div>
       <h2>Veuillez Selectionnez un jour dans le calendrier</h2>
       <CalendarContainer>
         <Calendar
             onChange={handleDateChange}
-            value={date}
+            value={selectedDate}
             minDate={minDate} // Utilisation de la date minimale j+3
             maxDate={maxDate} // Limite fixé a 180 jours
             defaultActiveStartDate={new Date()}

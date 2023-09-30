@@ -6,7 +6,7 @@ import useUserDataReservation from '../hooks/useUserDataReservation';
 
 function RestaurantList() {
   const { postalCode } = useParams(); 
-  const {date} = useUserDataReservation();
+  const {selectedDate} = useUserDataReservation();
   const restaurants = [
     { id: 1, name: 'Les patapons', description: 'Restaurant pour petits cons avec un description plus long', postalCodes: ["75016", "92100"] },
     { id: 2, name: 'Les patapoufs', description: 'Restaurant pour grandes poufs', postalCodes: ["75015", "75007"]  },
@@ -17,7 +17,7 @@ function RestaurantList() {
 
   return (
     <div>
-      <h2>Restaurants disponibles pour le {date.toDateString()} :</h2>
+      <h2>Restaurants disponibles pour le {selectedDate.toDateString()} :</h2>
         <RestaurantsListContainer>
           {restaurants.map(restaurant => {
             return (restaurant.postalCodes.includes(postalCode) &&

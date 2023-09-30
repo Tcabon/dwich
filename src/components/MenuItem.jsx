@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 
 //affiche les détails d'un item du menu
 
-function MenuItem({ id, name, price, addToCart }) {
-  const [quantity, setQuantity] = useState(1);
+function MenuItem({ item, addToCart }) {
+  const { name, price } = item;
   const handleAddToCart = () => {
-    addToCart({ id, name, price, quantity });
-		setQuantity(1);
+    addToCart(item);
   };
 
   return (

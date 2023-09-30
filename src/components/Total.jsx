@@ -1,11 +1,17 @@
 import React from 'react';
 import emailjs from 'emailjs-com';
 import { useNavigate } from 'react-router-dom';
+import useUserDataReservation from '../hooks/useUserDataReservation';
 
-function Total({ cart }) {
+function Total({ cart, total }) {
   const navigate = useNavigate();
-
-  const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  
+  // Vérifiez si cart existe (n'est pas null ou undefined)
+  if (!cart) {
+    return null; // Ou un autre rendu approprié si cart n'est pas défini
+  }
+  const totalAmount = total;
+  const { date, guestCount, town, dinnerHour } = useUserDataReservation();
 
   const handleConfirmOrder = async () => {
     const emailService = 'service_7nfumx7'; // Remplacez par votre Service ID EmailJS
@@ -13,7 +19,11 @@ function Total({ cart }) {
     const templateParams = {
       to_email: 'thibaut.cabon@gmail.com',
       total_amount: totalAmount,
-      cart_items: cart
+      cart_items: JSON.stringify(cart),
+      date,
+      guestCount,
+      town,
+      dinnerHour
     };
 
     try {
@@ -24,9 +34,14 @@ function Total({ cart }) {
     }
   };
 
+  const handleSplitOrder = () => {
+    navigate('/split-order');
+  }
+
   return (
     <div className="total">
       <p>Total : {totalAmount} €</p>
+      <button onClick={handleSplitOrder}>Partager la commande</button>
       <button onClick={handleConfirmOrder}>Confirmer la commande</button>
     </div>
   );

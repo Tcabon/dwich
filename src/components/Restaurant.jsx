@@ -16,33 +16,37 @@ const hours = [
 ];
 
 function Restaurant({ id, name, description }) {
-  const {date} = useUserDataReservation();
+  const {setDinnerHour} = useUserDataReservation();
+  const handleDinnerHour = (hour) => {
+    setDinnerHour(hour.hour);
+  }
   return (
-    <RestaurantContainer>
-      <RestaurantInfo>
+    <StyledRestaurantContainer>
+      <StyledRestaurantInfo>
           <h2>
-              <Link to={`/menu/${id}?date=${date.toISOString()}`}>
-                  {name}
-              </Link>
+            <Link to={`/menu/${id}`}>
+              {name}
+            </Link>
           </h2>
           <p>{description}</p>
-          <Datepicker>
+          <StyledDatepicker>
               {hours.map(hour => {
                   return (
-                      <DateButton
+                      <StyledDateButton
                           key={hour.id}
+                          onClick={() => handleDinnerHour(hour)}
                       >
                           {hour.hour}
-                      </DateButton>
+                      </StyledDateButton>
                       )
               })}
-          </Datepicker>
-      </RestaurantInfo>
-    </RestaurantContainer>
+          </StyledDatepicker>
+      </StyledRestaurantInfo>
+    </StyledRestaurantContainer>
   );
 }
 
-const RestaurantContainer = styled.div`
+const StyledRestaurantContainer = styled.div`
     background-image: url("https://www.spoon-restaurant.com/wp-content/uploads/2022/06/Spoon_cLe_Bonbon-1-scaled.jpg");
     background-size: cover;
     border-radius: 10px;
@@ -82,7 +86,7 @@ const RestaurantContainer = styled.div`
     }
 `;
 
-const RestaurantInfo = styled.div`
+const StyledRestaurantInfo = styled.div`
     width: 100%;
     padding-top: 20px;
     background: rgb(0,0,0);
@@ -90,7 +94,7 @@ const RestaurantInfo = styled.div`
     border-radius: 10px;
 `;
 
-const Datepicker = styled.div`
+const StyledDatepicker = styled.div`
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -103,7 +107,7 @@ const Datepicker = styled.div`
     border-radius: 0 0 10px 10px;
 `;
 
-const DateButton = styled.button`
+const StyledDateButton = styled.button`
     background-color: #DFDFDF;
     border-radius: 10px;
     border: none;

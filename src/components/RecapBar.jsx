@@ -3,17 +3,18 @@ import styled from "styled-components";
 import useUserDataReservation from '../hooks/useUserDataReservation';
 
 const RecapBar = () => {
-    const { date, isSelected, setIsSelected } = useUserDataReservation();
-
-    return (
-        {isSelected} && (
-            <StyledRecapBar>
-                --{isSelected}--
-                <p>Date sélectionnée : {date.toDateString()}</p>
-                <button onClick={() => setIsSelected(false)}>changer</button>
-            </StyledRecapBar>
-        )
-    )
+  const { selectedDate, guestCount, town, dinnerHour, handleResetDataReservation } = useUserDataReservation();
+  if (selectedDate && guestCount) {
+  return (
+    <StyledRecapBar>
+      ----
+      <p>Date sélectionnée : {selectedDate ? selectedDate.toDateString() : "pas de date"}</p>
+      <p>Nombres de dwicheurs : {guestCount} </p>
+      <p>Ville : {town}</p>
+      <p>Horaire : {dinnerHour}</p>
+      <button onClick={() => {handleResetDataReservation()}}>Reset</button>
+    </StyledRecapBar>   
+  )}
 };
 
 const StyledRecapBar = styled.div`
