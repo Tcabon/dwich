@@ -1,56 +1,34 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import useCart from '../hooks/useCart';
-import useStateStorage from "../hooks/useStateStorage";
+import useStateStorageWithDefault from "../hooks/useStateStorageWithDefault";
 import { useForm } from "react-hook-form";
+import AddGuestsToOrder from "./AddGuestsToOrder";
+import ModalToaster from "./ModalToaster";
+import AssignMealsToGuests from "./AssignMealsToGuests";
 
 const SplitOrder = () => {
-  const [guestsList = [], setGuestsList] = useStateStorage('sessionGuestsList');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { cartEntries, total } = useCart();
-  const {
-    register,
-    handleSubmit,
-    reset,
-  } = useForm()
-
-  const handleAddGuest = (data) => {
-    setGuestsList([...guestsList, data]);
-    console.log(guestsList)
-    reset();
-  };
-
-  const handleDeleteGuest = (index) => {
-    const updatedGuestsList = [...guestsList];
-    updatedGuestsList.splice(index, 1);
-    setGuestsList(updatedGuestsList);
-  };
-
-  const handleAddMealToGuest = () => {
-
-  };
-
-  const handleRemoveMealFromGuest = () => {
-
-  };
-
+  const [assignedCartEntries, setAssignedCartEntries] = useStateStorageWithDefault('sessionAssignedCartEntries', cartEntries);
+  
   return (
     <StyledSplitOrder>
-      <form onSubmit={handleSubmit(handleAddGuest)}>
-        <input placeholder='Nom' {...register("name", {required: true})} />
-        <input type='email' placeholder='email' {...register("email", {required: true})} />
-        <input type='number' placeholder='Montant pris en charge' {...register("Amount", {required: true})}/>
-        <button type='submit'>Ajouter</button>
-      </form>
-      <div>
-        Guests Lists
-        {guestsList.map((guest, index) => (
-          <div key={index}>
-            {guest.name}
-            <button onClick={() => handleDeleteGuest(index)}>Supprimer</button>
-          </div>
-        ))}
-      </div>
-      =========
+      <button onClick={() => setIsModalOpen(true)}>Ajouter Convives</button>
+      <ModalToaster title='Ajouter Convives' content={AddGuestsToOrder} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <AssignMealsToGuests assignedCartEntries={assignedCartEntries} setAssignedCartEntries={setAssignedCartEntries} />
+      
+    </StyledSplitOrder>
+  )
+};
+
+const StyledSplitOrder = styled.div`
+
+`
+
+export default SplitOrder;
+
+/*=========
       =========
       CONVIVES
         ajouter convive
@@ -64,13 +42,4 @@ const SplitOrder = () => {
       LISTE PLATS
         Afficher plat
           bouton ajouter plat convive
-      CONFIRMER COMMANDE
-    </StyledSplitOrder>
-  )
-};
-
-const StyledSplitOrder = styled.div`
-
-`
-
-export default SplitOrder;
+      CONFIRMER COMMANDE*/
