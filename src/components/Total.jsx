@@ -11,7 +11,7 @@ function Total({ cart, total }) {
     return null; // Ou un autre rendu approprié si cart n'est pas défini
   }
   const totalAmount = total;
-  const { date, guestCount, town, dinnerHour } = useUserDataReservation();
+  const { selectedDate, guestCount, town, dinnerHour } = useUserDataReservation();
 
   const handleConfirmOrder = async () => {
     const emailService = 'service_7nfumx7'; // Remplacez par votre Service ID EmailJS
@@ -20,7 +20,7 @@ function Total({ cart, total }) {
       to_email: 'thibaut.cabon@gmail.com',
       total_amount: totalAmount,
       cart_items: JSON.stringify(cart),
-      date,
+      date: selectedDate,
       guestCount,
       town,
       dinnerHour

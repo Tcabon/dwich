@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import '@fontsource/bebas-neue';
@@ -17,34 +17,37 @@ const hours = [
 
 function Restaurant({ id, name, description }) {
   const {setDinnerHour} = useUserDataReservation();
+  const [selectedHour, setSelectedHour] = useState(null);
+
   const handleDinnerHour = (hour) => {
     setDinnerHour(hour.hour);
+    setSelectedHour(hour.id);
   }
+
   return (
     <StyledRestaurantContainer>
       <StyledRestaurantInfo>
-          <h2>
-            <Link to={`/menu/${id}`}>
-              {name}
+        <h2>
+          {name}
+        </h2>
+        <p>{description}</p>
+        <StyledDatepicker>
+          {hours.map(hour => (
+            <Link key={hour.id} to={`/menu/${id}`} style={{ textDecoration: 'none' }}>
+              <StyledDateButton
+                onClick={() => handleDinnerHour(hour)}
+                className={selectedHour === hour.id ? 'selected' : ''}
+              >
+                {hour.hour}
+              </StyledDateButton>
             </Link>
-          </h2>
-          <p>{description}</p>
-          <StyledDatepicker>
-              {hours.map(hour => {
-                  return (
-                      <StyledDateButton
-                          key={hour.id}
-                          onClick={() => handleDinnerHour(hour)}
-                      >
-                          {hour.hour}
-                      </StyledDateButton>
-                      )
-              })}
-          </StyledDatepicker>
+          ))}
+        </StyledDatepicker>
       </StyledRestaurantInfo>
     </StyledRestaurantContainer>
   );
 }
+
 
 const StyledRestaurantContainer = styled.div`
     background-image: url("https://www.spoon-restaurant.com/wp-content/uploads/2022/06/Spoon_cLe_Bonbon-1-scaled.jpg");
@@ -112,7 +115,7 @@ const StyledDateButton = styled.button`
     border-radius: 10px;
     border: none;
     margin-left: 10px;
-    &:active {
+    &.selected {
       background-color: #F2D621;
     }
 `;

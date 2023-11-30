@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import useStateStorage from "../hooks/useStateStorage";
+import useStateStorageWithDefault from "../hooks/useStateStorageWithDefault";
+import NotificationToaster from "./NotificationToaster";
+import useUserDataReservation from "../hooks/useUserDataReservation";
 
 const AddGuestsToOrder = () => {
-  const [guestsList = [], setGuestsList] = useStateStorage('sessionGuestsList');
+  const [guestsList, setGuestsList] = useStateStorageWithDefault('sessionGuestsList', []);
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const { guestCount, setGuestCount } = useUserDataReservation();
+
   const {
     register,
     handleSubmit,
@@ -19,6 +24,13 @@ const AddGuestsToOrder = () => {
   };
 
   const handleAddGuest = (data) => {
+    if (guestCount == guestsList.length) {
+      setGuestCount(guestCount + 1);
+      setIsNotificationOpen(true);
+      setTimeout(() => {
+        setIsNotificationOpen(false);
+      }, 1500);
+    }
     data.userId = generateUniqueId();
     data.assignedCartEntries = [];
     setGuestsList([...guestsList, data]);
@@ -45,6 +57,7 @@ const AddGuestsToOrder = () => {
           <input type='email' placeholder='email' {...register("email", {required: true})} />
           <button type='submit'>Ajouter</button>
       </StyledForm>
+      <NotificationToaster isNotificationOpen={isNotificationOpen} setIsNotificationOpen={setIsNotificationOpen} />
         </StyledAddGuestsToOrder>
     )
 };

@@ -5,6 +5,10 @@ body {
   background-color: #B6D8D1;
 }
 
+body.modal-open {
+  overflow: hidden;
+}
+
 .container {
   max-width: 800px;
   margin: 0 auto;

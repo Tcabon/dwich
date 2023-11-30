@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useUserDataReservation from '../hooks/useUserDataReservation';
 import styled from 'styled-components';
 
@@ -13,8 +13,9 @@ const guestCountsFields = [
 const BookingCounter = () => {
   const {guestCount, setGuestCount} = useUserDataReservation();
 
-  const handleGuestCountChange = (guestCount) => {
-    setGuestCount(guestCount);
+
+  const handleGuestCountChange = (elem) => {
+    setGuestCount(elem.count);
   };
 
     return (
@@ -25,8 +26,9 @@ const BookingCounter = () => {
             return (
               <StyledSelectedCount 
                 key={elem.id} 
-                onClick={() => handleGuestCountChange(elem.count)}
+                onClick={() => handleGuestCountChange(elem)}
                 value={elem.count}
+                className={guestCount === elem.count ? 'selected' : ''} //permet de garder le choix de guest en surbrillance
               >
                 {elem.count}
               </StyledSelectedCount>
@@ -51,7 +53,7 @@ const StyledSelectedCount = styled.button`
     border-radius: 10px;
     border: none;
     margin-left: 10px;
-    &:active {
+    &.selected {
       background-color: #F2D621;
     }
 `

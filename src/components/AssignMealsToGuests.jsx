@@ -2,12 +2,13 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import ModalToaster from "./ModalToaster";
 import AssignMealsToGuestsForm from "./AssignMealsToGuestsForm";
-import useStateStorage from "../hooks/useStateStorage";
+import useStateStorageWithDefault from "../hooks/useStateStorageWithDefault";
+
 
 const AssignMealsToGuests = ({assignedCartEntries, setAssignedCartEntries}) => {
   const [selectedCartEntryIds, setSelectedCartEntryIds] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [guestsList = [], setGuestsList] = useStateStorage('sessionGuestsList');
+  const [guestsList, setGuestsList] = useStateStorageWithDefault('sessionGuestsList', []);
 
   const removeCartEntryFromGuest = (userId, assignedCartEntryId) => {
     console.log(assignedCartEntryId);
@@ -27,7 +28,7 @@ const AssignMealsToGuests = ({assignedCartEntries, setAssignedCartEntries}) => {
 
   const handleRemoveCartEntryFromGuest = (entry, userId) => {
     setAssignedCartEntries(() => [...assignedCartEntries, entry]);
-    setGuestsList(() => removeCartEntryFromGuest(userId, entry))
+    setGuestsList(() => removeCartEntryFromGuest(userId, entry.cartEntryId))
   };
 
   const handleCheckboxChange = (entryId) => {
@@ -73,7 +74,9 @@ const AssignMealsToGuests = ({assignedCartEntries, setAssignedCartEntries}) => {
         </div>
       )
     )}
-    <button onClick={() => setIsModalOpen(true)}>Assigner Plats</button>
+    {assignedCartEntries && assignedCartEntries != 0 && (
+      <button onClick={() => setIsModalOpen(true)}>Assigner Plats</button>
+    )}
     {guestsList.map((guest, guestIndex) => (
       <div key={guestIndex}>
         <div>

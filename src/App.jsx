@@ -9,7 +9,8 @@ import BookingCounter from './components/BookingCounter';
 
 function App() {
   const {selectedDate, guestCount, setTown} = useUserDataReservation();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+
   const getElementFromGoogleMapsObject = (apiObject, type) => {
     if (apiObject && apiObject.address_components && Array.isArray(apiObject.address_components)) {
       for (let i = 0; i < apiObject.address_components.length; i++) {
@@ -23,7 +24,9 @@ function App() {
   }
 
   const handlePlaceSelect = place => {
-    setTown(getElementFromGoogleMapsObject(place, "locality"));
+    console.log(place)
+    const town = getElementFromGoogleMapsObject(place, "locality") || getElementFromGoogleMapsObject(place, "postal_code");
+    setTown(town);
     navigate(`/restaurants-list/${getElementFromGoogleMapsObject(place, "postal_code")}`);
   }
 
@@ -35,15 +38,16 @@ function App() {
         <CalendarGrid />
         <BookingCounter />
         {selectedDate && guestCount &&
-            <AutoCompleteContainer>
-              <h3>saisissez votre ville</h3>
-              <Autocomplete
-                  apiKey={'AIzaSyCfclF8Nh5LCwpHTzB9-RFP_lU1VcOYRHI'}
-                  onPlaceSelected={(place) => {
-                    handlePlaceSelect(place);
-                  }}
-              />
-            </AutoCompleteContainer>
+          <AutoCompleteContainer>
+            <h3>saisissez votre ville</h3>
+            <Autocomplete
+              apiKey={'AIzaSyCfclF8Nh5LCwpHTzB9-RFP_lU1VcOYRHI'}
+              onPlaceSelected={(place) => {
+                handlePlaceSelect(place);
+              }}
+              options={{ types: ['(regions)'], componentRestrictions: { country: 'fr' } }}
+            />
+          </AutoCompleteContainer>
         }
       </div>
     </>

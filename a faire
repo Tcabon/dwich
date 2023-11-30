@@ -1,6 +1,23 @@
-Ajouter des convives
-    Une fois ajouté le convive est visible en bas de page
-Listing des plats du panier
-    case a cocher pour attribuer les plats aux convives
-recap des convives
-    listing des plats attribué sous chaque entrée de convive
+HOME
+    5 et + ne se selectionne pas lorsque incrémenté
+
+selection menu 
+    -Quand ajout panier ==> animation toaster
+    
+repartition order convives
+    -Locker adresse mail non valide (formulaire david)
+----    -retrouver les guest au moment d assigner (bug fonctionnel)
+????    -identifier le bug qui a fait sauté le guestsList 
+----    -Refaire le template sur emailJs(order confirmation multi)
+    -Quand ajout convive supérieur au nombre de convives définis ==> message d'alerte
+Total
+    
+   
+   
+   
+    REFACTO 
+        -refacto le bouton confirmOrder, et avoir le meme composants dans les deux cas de figure
+
+    handleConfirmOrder
+        Prévoir un flag pour savoir si il y a eu un split order, et vérifier le contenu du cart, mettre la data au propre
+

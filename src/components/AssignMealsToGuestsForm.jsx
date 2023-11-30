@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import useStateStorage from "../hooks/useStateStorage";
 import styled from "styled-components";
+import NotificationToaster from "./NotificationToaster";
 
 const AssignMealsToGuestsForm = (props) => {
   const { 
@@ -12,8 +13,9 @@ const AssignMealsToGuestsForm = (props) => {
     guestsList,
     setGuestsList
   } = props;
-
+  console.log(props);
   const [selectedOption, setSelectedOption] = useState();
+  
 
   const findObjectsWithMatchingIds = () => {
     // Find objects from array1 with IDs that match any ID in array2
@@ -67,6 +69,7 @@ const AssignMealsToGuestsForm = (props) => {
       <button onClick={() => handleAddCartEntriesToUser()}>
             feu
       </button>
+    
     </StyledAssignMealsToGuestsForm>
   )
 }

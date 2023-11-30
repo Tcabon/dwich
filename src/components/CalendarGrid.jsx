@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { differenceInCalendarDays } from "date-fns"
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import '../styles/calendar.css';
@@ -12,10 +13,24 @@ function CalendarGrid() {
   minDate.setDate(minDate.getDate());
   const maxDate = new Date();
   maxDate.setDate(maxDate.getDate() + 180)
+  const highlightedDates = [selectedDate];
 
- const handleDateChange = (value) => {
-  setSelectedDate(value);
- }
+  const isSameDay = (a, b) => {
+    return differenceInCalendarDays(a, b) === 0;
+  }
+
+  function tileClassName({ date, view }) {
+    if (
+      view === "month" &&
+      highlightedDates.find((dDate) => isSameDay(dDate, date))
+    ) {
+      return "highlight";
+    }
+  }
+
+  const handleDateChange = (value) => {
+    setSelectedDate(value);
+  }
 
   return (
     <div>
@@ -27,6 +42,7 @@ function CalendarGrid() {
             minDate={minDate} // Utilisation de la date minimale j+3
             maxDate={maxDate} // Limite fixé a 180 jours
             defaultActiveStartDate={new Date()}
+            tileClassName={tileClassName}
         />
       </CalendarContainer>
     </div>
@@ -93,6 +109,9 @@ const CalendarContainer = styled.div`
   .react-calendar__navigation button:disabled {
     background: none;
   }
-`;
 
+  .highlight {
+    background-color: #F2D621;
+  };
+`
 export default CalendarGrid;
