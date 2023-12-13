@@ -41,7 +41,7 @@ function App() {
           <AutoCompleteContainer>
             <h3>saisissez votre ville</h3>
             <Autocomplete
-              apiKey={'AIzaSyCfclF8Nh5LCwpHTzB9-RFP_lU1VcOYRHI'}
+              apiKey={'AIzaSyDjnSesrQA-c56OERPP6ObwQZlnwof1zRs'}
               onPlaceSelected={(place) => {
                 handlePlaceSelect(place);
               }}

@@ -16,12 +16,15 @@ const hours = [
 ];
 
 function Restaurant({ id, name, description }) {
-  const {setDinnerHour} = useUserDataReservation();
+  const {setDinnerHour, setRestaurantName} = useUserDataReservation();
   const [selectedHour, setSelectedHour] = useState(null);
 
   const handleDinnerHour = (hour) => {
+    console.log("in handle")
+    console.log(name);
     setDinnerHour(hour.hour);
     setSelectedHour(hour.id);
+    setRestaurantName(name);
   }
 
   return (

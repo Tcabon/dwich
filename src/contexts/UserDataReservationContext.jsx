@@ -10,6 +10,7 @@ const UserDataReservationContextProvider = ({ children }) => {
   const [guestCount, setGuestCount] = useStateStorage('sessionGuestCount')
   const [town, setTown] = useStateStorage('sessionTown')
   const [dinnerHour, setDinnerHour] = useStateStorage('sessionDinnerHour')
+  const [restaurantName, setRestaurantName] = useStateStorage('sessionRestaurantName')
   const navigate = useNavigate();
 
   const handleResetDataReservation = () => {
@@ -18,6 +19,7 @@ const UserDataReservationContextProvider = ({ children }) => {
     setGuestCount(null);
     setTown(null);
     setDinnerHour(null);
+    setRestaurantName(null);
     navigate('/');
   };
 
@@ -31,6 +33,8 @@ const UserDataReservationContextProvider = ({ children }) => {
       setTown,
       dinnerHour,
       setDinnerHour,
+      restaurantName,
+      setRestaurantName,
       handleResetDataReservation,
     }}>
       {children}

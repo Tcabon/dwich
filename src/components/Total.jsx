@@ -17,7 +17,7 @@ function Total({ cart, total }) {
     const emailService = 'service_7nfumx7'; // Remplacez par votre Service ID EmailJS
     const template = 'order_confirmation'; // Remplacez par le nom de votre modèle EmailJS
     const templateParams = {
-      to_email: 'thibaut.cabon@gmail.com',
+      to_email: 'app.dwich@gmail.com',
       total_amount: totalAmount,
       cart_items: JSON.stringify(cart),
       date: selectedDate,

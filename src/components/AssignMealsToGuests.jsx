@@ -3,12 +3,12 @@ import styled from "styled-components";
 import ModalToaster from "./ModalToaster";
 import AssignMealsToGuestsForm from "./AssignMealsToGuestsForm";
 import useStateStorageWithDefault from "../hooks/useStateStorageWithDefault";
-
+import useLunch from "../hooks/useLunch";
 
 const AssignMealsToGuests = ({assignedCartEntries, setAssignedCartEntries}) => {
   const [selectedCartEntryIds, setSelectedCartEntryIds] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [guestsList, setGuestsList] = useStateStorageWithDefault('sessionGuestsList', []);
+  const {guestsList, setGuestsList} = useLunch();
 
   const removeCartEntryFromGuest = (userId, assignedCartEntryId) => {
     console.log(assignedCartEntryId);
@@ -104,8 +104,6 @@ const AssignMealsToGuests = ({assignedCartEntries, setAssignedCartEntries}) => {
       setAssignedCartEntries={setAssignedCartEntries}
       selectedCartEntryIds={selectedCartEntryIds}
       setSelectedCartEntryIds={setSelectedCartEntryIds}
-      guestsList={guestsList}
-      setGuestsList={setGuestsList}
     />
     </StyledAssignMealsToGuests>
   )

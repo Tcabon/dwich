@@ -10,12 +10,14 @@ import UserDataReservationContextProvider from "./contexts/UserDataReservationCo
 import CartContextProvider from './contexts/CartContext';
 import RecapBar from "./components/RecapBar.jsx";
 import SplitOrder from './components/SplitOrder.jsx';
+import LunchContextProvider from './contexts/LunchContext.jsx';
 
 const rootElement = document.getElementById('app');
 createRoot(rootElement).render(
   <BrowserRouter>
   <CartContextProvider>
   <UserDataReservationContextProvider>
+  <LunchContextProvider>
     <Routes>
         <Route path="/" element={<App />} />
         <Route path="/restaurants-list/:postalCode" element={<RestaurantList />} />
@@ -24,6 +26,7 @@ createRoot(rootElement).render(
         <Route path="/split-order" element={<SplitOrder />} />
     </Routes>
     <RecapBar />
+  </LunchContextProvider>
   </UserDataReservationContextProvider>
   </CartContextProvider>
   </BrowserRouter>

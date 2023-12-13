@@ -9,32 +9,34 @@ import ModalToaster from "./ModalToaster";
 import AssignMealsToGuests from "./AssignMealsToGuests";
 import useUserDataReservation from "../hooks/useUserDataReservation";
 import { useNavigate } from 'react-router-dom';
+import useLunch from "../hooks/useLunch";
 
 const SplitOrder = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { cartEntries, total } = useCart();
   const [assignedCartEntries, setAssignedCartEntries] = useStateStorageWithDefault('sessionAssignedCartEntries', cartEntries);
-  const { selectedDate, guestCount, town, dinnerHour } = useUserDataReservation();
-  const [guestsList, setGuestsList] = useStateStorageWithDefault('sessionGuestsList', []);
+  const { selectedDate, guestCount, town, dinnerHour, restaurantName } = useUserDataReservation();
+  const {guestsList, setGuestsList} = useLunch();
   const totalAmount = total;
   const navigate = useNavigate();
-  console.log(assignedCartEntries);
+  console.log(restaurantName);
   const handleConfirmOrder = async () => {
     const emailService = 'service_7nfumx7'; // Remplacez par votre Service ID EmailJS
     const template = 'order_confirmation_multi'; // Remplacez par le nom de votre modèle EmailJS
     const templateParams = {
-      to_email: 'thibaut.cabon@gmail.com',
+      to_email: 'app.dwich@gmail.com',
       total_amount: totalAmount,
       cart_items: JSON.stringify(cartEntries),
       guests_list: JSON.stringify(guestsList),
       date: selectedDate,
-      guestCount,
+      guest_count: guestCount,
       town,
-      dinnerHour,
+      dinner_hour: dinnerHour,
+      restaurant_name: restaurantName,
     };
 
     try {
-      //await emailjs.send(emailService, template, templateParams, import.meta.env.VITE_REACT_APP_EMAILJS_USER_ID);
+      await emailjs.send(emailService, template, templateParams, import.meta.env.VITE_REACT_APP_EMAILJS_USER_ID);
       navigate('/order-confirmation'); // Redirection vers la page de confirmation
     } catch (error) {
       console.error('Erreur lors de l\'envoi de l\'e-mail :', error);

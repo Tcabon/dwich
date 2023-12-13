@@ -1,7 +1,6 @@
 import React, {useState} from "react";
-import useStateStorage from "../hooks/useStateStorage";
 import styled from "styled-components";
-import NotificationToaster from "./NotificationToaster";
+import useLunch from "../hooks/useLunch";
 
 const AssignMealsToGuestsForm = (props) => {
   const { 
@@ -10,12 +9,10 @@ const AssignMealsToGuestsForm = (props) => {
     selectedCartEntryIds,
     setIsModalOpen,
     setSelectedCartEntryIds,
-    guestsList,
-    setGuestsList
   } = props;
   console.log(props);
   const [selectedOption, setSelectedOption] = useState();
-  
+  const {guestsList, setGuestsList} = useLunch();
 
   const findObjectsWithMatchingIds = () => {
     // Find objects from array1 with IDs that match any ID in array2
