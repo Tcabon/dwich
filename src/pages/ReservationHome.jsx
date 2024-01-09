@@ -1,13 +1,14 @@
 import React from 'react'
-import CalendarGrid from './components/CalendarGrid'
-import './App.css';
+import CalendarGrid from '../components/CalendarGrid'
+import '../App.css';
 import Autocomplete from "react-google-autocomplete";
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import useUserDataReservation from './hooks/useUserDataReservation';
-import BookingCounter from './components/BookingCounter';
+import useUserDataReservation from '../hooks/useUserDataReservation';
+import BookingCounter from '../components/BookingCounter';
 
-function App() {
+
+const ReservationHome = () => {
   const {selectedDate, guestCount, setTown} = useUserDataReservation();
   const navigate = useNavigate();
 
@@ -24,7 +25,6 @@ function App() {
   }
 
   const handlePlaceSelect = place => {
-    console.log(place)
     const town = getElementFromGoogleMapsObject(place, "locality") || getElementFromGoogleMapsObject(place, "postal_code");
     setTown(town);
     navigate(`/restaurants-list/${getElementFromGoogleMapsObject(place, "postal_code")}`);
@@ -37,7 +37,7 @@ function App() {
         <h3>Jamais sans Dwich</h3>
         <CalendarGrid />
         <BookingCounter />
-        {selectedDate && guestCount &&
+        {selectedDate && !!guestCount &&
           <AutoCompleteContainer>
             <h3>saisissez votre ville</h3>
             <Autocomplete
@@ -76,4 +76,4 @@ const AutoCompleteContainer = styled.div`
   }
 `;
 
-export default App
+export default ReservationHome;

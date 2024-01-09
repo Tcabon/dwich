@@ -1,5 +1,5 @@
 import React from 'react';
-import Restaurant from './Restaurant';
+import Restaurant from '../components/Restaurant';
 import styled from 'styled-components';
 import {useParams} from "react-router-dom";
 import useUserDataReservation from '../hooks/useUserDataReservation';

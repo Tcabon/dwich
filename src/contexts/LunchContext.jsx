@@ -5,12 +5,14 @@ export const LunchContext = createContext();
 
 const LunchContextProvider = ({children}) => {
   const [guestsList, setGuestsList] = useStateStorageWithDefault('sessionGuestsList', []);
-
+  const [guestCount, setGuestCount] = useStateStorageWithDefault('sessionGuestCount', 0);
 
   return (
     <LunchContext.Provider value={{
       guestsList,
       setGuestsList,
+      guestCount,
+      setGuestCount,
     }}>
       {children}
     </LunchContext.Provider>

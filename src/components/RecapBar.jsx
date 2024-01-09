@@ -1,18 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 import useUserDataReservation from '../hooks/useUserDataReservation';
+import { useNavigate } from 'react-router-dom';
 
 const RecapBar = () => {
   const { selectedDate, guestCount, town, dinnerHour, handleResetDataReservation } = useUserDataReservation();
+  const navigate = useNavigate();
+
+  const handleResetClick = () => {
+    handleResetDataReservation();
+    navigate('/');
+  }
+  
   if (selectedDate && guestCount) {
   return (
     <StyledRecapBar>
       ----
       <p>Date sélectionnée : {selectedDate ? selectedDate.toDateString() : "pas de date"}</p>
-      <p>Nombres de dwicheurs : {guestCount} </p>
+      <p>Nombres de dwicheurs : {guestCount ? guestCount.label : "-"} </p>
       <p>Ville : {town}</p>
       <p>Horaire : {dinnerHour}</p>
-      <button onClick={() => {handleResetDataReservation()}}>Reset</button>
+      <button onClick={() => {handleResetClick()}}>Reset</button>
     </StyledRecapBar>   
   )}
 };

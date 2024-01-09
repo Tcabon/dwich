@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 //affiche les détails d'un item du menu
 

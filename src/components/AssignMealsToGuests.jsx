@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import ModalToaster from "./ModalToaster";
 import AssignMealsToGuestsForm from "./AssignMealsToGuestsForm";
-import useStateStorageWithDefault from "../hooks/useStateStorageWithDefault";
 import useLunch from "../hooks/useLunch";
 
 const AssignMealsToGuests = ({assignedCartEntries, setAssignedCartEntries}) => {
@@ -58,11 +57,6 @@ const AssignMealsToGuests = ({assignedCartEntries, setAssignedCartEntries}) => {
 
   return (
     <StyledAssignMealsToGuests>
-      {selectedCartEntryIds.map((entry, index) => (
-        <div key={index}>
-          {entry}
-        </div>
-      ))}
       {sortedData.map((entry, index) => (
         <div key={index}>
           <input

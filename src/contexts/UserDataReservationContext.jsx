@@ -1,26 +1,30 @@
 import React, { createContext, useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
 import useStateStorage from "../hooks/useStateStorage";
 import useDateStateStorage from "../hooks/useDateStateStorage";
+import useCart from "../hooks/useCart";
+import useStateStorageWithDefault from "../hooks/useStateStorageWithDefault";
+import useLunch from "../hooks/useLunch";
 
 export const UserDataReservationContext = createContext();
 
 const UserDataReservationContextProvider = ({ children }) => {
-  const [selectedDate, setSelectedDate] = useDateStateStorage('sessionSelectedDate')
-  const [guestCount, setGuestCount] = useStateStorage('sessionGuestCount')
-  const [town, setTown] = useStateStorage('sessionTown')
-  const [dinnerHour, setDinnerHour] = useStateStorage('sessionDinnerHour')
-  const [restaurantName, setRestaurantName] = useStateStorage('sessionRestaurantName')
-  const navigate = useNavigate();
+  const [selectedDate, setSelectedDate] = useDateStateStorage('sessionSelectedDate');
+  const [guestCount, setGuestCount] = useStateStorageWithDefault('sessionGuestCount', 0);
+  const [town, setTown] = useStateStorage('sessionTown');
+  const [dinnerHour, setDinnerHour] = useStateStorage('sessionDinnerHour');
+  const [restaurantName, setRestaurantName] = useStateStorage('sessionRestaurantName');
+  const { setGuestsList } = useLunch();
+  const {setCartEntries} = useCart();
 
   const handleResetDataReservation = () => {
     console.log("reset");
+    setGuestsList([]);
     setSelectedDate(new Date());
-    setGuestCount(null);
+    setGuestCount(0);
     setTown(null);
     setDinnerHour(null);
     setRestaurantName(null);
-    navigate('/');
+    setCartEntries(null);
   };
 
   return (

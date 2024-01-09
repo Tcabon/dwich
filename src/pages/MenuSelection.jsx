@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import MenuItem from './MenuItem';
-import Total from './Total';
+import MenuItem from '../components/MenuItem';
+import Total from '../components/Total';
 import useUserDataReservation from '../hooks/useUserDataReservation';
 import useCart from '../hooks/useCart';
 
 function MenuSelection() {
-  const { removeFromCart, cartEntries, addToCart, total, CartEntries } = useCart();
+  const { cartEntries, addToCart, total, CartEntries } = useCart();
   const { restaurantId } = useParams();
 
 
