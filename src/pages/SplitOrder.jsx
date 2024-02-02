@@ -25,7 +25,7 @@ const SplitOrder = () => {
 };
 
 const StyledSplitOrder = styled.div`
-
+  
 `
 
 export default SplitOrder;

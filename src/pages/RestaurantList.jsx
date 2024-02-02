@@ -15,32 +15,61 @@ function RestaurantList() {
     // ... Ajoutez plus de restaurants ici
   ];
 
+  // Vérifiez s'il y a des restaurants correspondant au code postal
+  const filteredRestaurants = restaurants.filter(restaurant => restaurant.postalCodes.includes(postalCode));
+
   return (
-    <div>
-      <h2>Restaurants disponibles pour le {selectedDate.toDateString()} :</h2>
-      <RestaurantsListContainer>
-        {restaurants.map(restaurant => (
-          restaurant.postalCodes.includes(postalCode) &&
-            <Restaurant
-              key={restaurant.id}
-              id={restaurant.id}
-              name={restaurant.name}
-              description={restaurant.description}
-            />
-          )
-        )}
-      </RestaurantsListContainer>
-    </div>
+    <StyledRestaurantsListPage>
+      <StyledTitle>Choisissez votre restaurant</StyledTitle>
+      <StyledTitleLower>Puis sélectionnez une heure</StyledTitleLower>
+      {filteredRestaurants.length > 0 ? (
+        <StyledRestaurantsListContainer>
+          {restaurants.map(restaurant => (
+            restaurant.postalCodes.includes(postalCode) &&
+              <Restaurant
+                key={restaurant.id}
+                id={restaurant.id}
+                name={restaurant.name}
+                description={restaurant.description}
+              />
+            )
+          )}
+        </StyledRestaurantsListContainer>
+      ) : (
+        <StyledNoResultsMessage>Aucun restaurant disponible pour le code postal {postalCode}.</StyledNoResultsMessage>
+      )}
+    </StyledRestaurantsListPage>
   );
 }
 
-const RestaurantsListContainer = styled.div`
+const StyledRestaurantsListPage = styled.div`
+  background-color: #fff62b
+`;
+
+const StyledRestaurantsListContainer = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     padding: 0 20px;
     
+`;
+
+const StyledNoResultsMessage = styled.p`
+  color: red;
+  font-weight: bold;
+`;
+
+const StyledTitle = styled.h1`
+  font-size: 2em;
+  font-weight: bold;
+  margin: 10px 0 15px 0;
+`;
+
+const StyledTitleLower = styled.h1`
+  font-size: 1.5em;
+  margin: 10px 0 15px 15px;
+  text-align: left;
 `;
 
 export default RestaurantList;

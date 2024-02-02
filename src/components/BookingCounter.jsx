@@ -9,10 +9,10 @@ const guestCountsFields = [
   { id: 4, count: 4, label: '4'},
   { id: 5, count: 5, label: '5'},
   { id: 6, count: 6, label: '6'},
-  { id: 7, count: 10, label: '7 et +'}
+  { id: 7, count: 10, label: '7+'}
 ];
 
-const BookingCounter = () => {
+const BookingCounter = ({ backgroundColor }) => {
   const {guestCount, setGuestCount} = useUserDataReservation();
 
 
@@ -21,9 +21,9 @@ const BookingCounter = () => {
   };
 
     return (
-      <StyledBookingCounterContainer>
-        <h2>Nombres de dwicheur</h2>
-        <StyledBookingCounter>
+      <StyledBookingCounterContainer style={{ backgroundColor: "#fff" }}>
+        <StyledTitle>Personne en coin de table !</StyledTitle>
+        <StyledBookingCounter >
           {guestCountsFields.map(elem => {
             return (
               <StyledSelectedCount 
@@ -37,33 +37,44 @@ const BookingCounter = () => {
             )
           })}
         </ StyledBookingCounter>
-        {!!guestCount && (
-          <h2>Il y'aura {guestCount.label} dwicheur</h2>
-        )}
-        {!guestCount && (
-          <h2>Choisissez un nombre de dwicheur</h2>
-        )}
       </StyledBookingCounterContainer>
     )
 }
 
 const StyledBookingCounterContainer = styled.div`
-
+  background-color: ${(props) => props.backgroundColor || 'transparent'};
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `
 
 const StyledBookingCounter = styled.div`
-
+  height: 80px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 `
 
 const StyledSelectedCount = styled.button`
-    background-color: #DFDFDF;
-    border-radius: 10px;
-    border: none;
-    margin-left: 10px;
-    &.selected {
-      background-color: #F2D621;
-    }
+  background-color: #e39207; /* Couleur de fond */
+  border: none;
+  border-radius: 5px;
+  color: #fff; /* Couleur du texte */
+  font-size: 1.2rem;
+  margin-left: 10px;
+
+  &.selected {
+    background-color: #F2D621;
+  }
 `
 
+const StyledTitle = styled.h1`
+  font-size: 1.5em;
+  margin: 20px 0 0 0;
+  padding-left: 15px;
+`;
 
-export default BookingCounter
+
+export default BookingCounter;

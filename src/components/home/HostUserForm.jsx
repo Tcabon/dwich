@@ -1,22 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Button from "../common/Button";
 import { useForm } from "react-hook-form";
 import useLunch from "../../hooks/useLunch";
 import { useNavigate } from 'react-router-dom';
 import isCustomEmailValid from "../../methods/isCustomEmailValid";
 import generateUniqueId from "../../methods/generateUniqueId";
 
-const UserFormButton = () => {
-  return (
-    <div>
-      Faire une reservation
-    </div>
-  )
-}
-
 const HostUserForm = () => {
-  const [isFormVisible, setIsFormVisible] = useState(false);
   const { guestsList, setGuestsList } = useLunch();
   const navigate = useNavigate();
 
@@ -26,10 +16,6 @@ const HostUserForm = () => {
     reset,
     formState: { errors },
   } = useForm();
-
-  const handleButtonClick = () => {
-    setIsFormVisible(true);
-  }
 
   const handleAddHost = (data) => {
     if (errors.email) {
@@ -52,37 +38,71 @@ const HostUserForm = () => {
 
   return (
     <StyledWrapper>
-      <Button action={handleButtonClick} Display={UserFormButton} />
-      {isFormVisible && (
-        <div>
-          <StyledForm onSubmit={handleSubmit(handleAddHost)}>
-            <input placeholder='Nom' {...register("name", { required: true })} />
-            <input
-              type='email'
-              placeholder='email'
-              {...register("email", {
-                required: true,
-                validate: isCustomEmailValid, // Utilisation de la validation personnalisée
-              })}
-            />
-            {errors.email && (
-              <span style={{ color: "red" }}>{errors.email.message}</span>
-            )}
-            <button type='submit'>Ajouter</button>
-          </StyledForm>
-        </div>
-      )}
+      <StyledText>Faisons connaissance avant de commencer</StyledText>
+      <StyledForm onSubmit={handleSubmit(handleAddHost)}>
+        <StyledRow>
+          <StyledInputName placeholder='Nom' {...register("name", { required: true })} />
+          <StyledInputName placeholder='Prénom' {...register("firstName", { required: true })} />
+        </StyledRow>
+          <StyledInputEmail
+            type='email'
+            placeholder='email'
+            {...register("email", {
+              required: true,
+              validate: isCustomEmailValid, // Utilisation de la validation personnalisée
+            })}
+          />
+          {errors.email && (
+            <span style={{ color: "red" }}>{errors.email.message}</span>
+          )}
+        <button type='submit'>Réserver</button>
+      </StyledForm>
     </StyledWrapper>
   )
 }
 
 const StyledWrapper = styled.div`
-  
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+const StyledRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Espace entre les éléments de la ligne */
+  margin-bottom: 10px; /* Ajout de marge en bas pour espacement */
+`;
+
+const StyledInputName = styled.input`
+  padding: 8px;
+  flex: 1;
+  width: 48% /* Ajout de marge à droite pour séparer les champs */
+`;
+
+const StyledInputEmail = styled.input`
+  align-self: stretch;
+  padding: 8px;
 `;
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  align-self: stretch;
+  padding: 20px;
+`;
+
+const StyledText = styled.p`
+  margin: 10px 0px 20px 15px; 
+  float: left;
+  font-family: "Public Sans";
+  font-size: 1.5em;
+  font-style: normal;
 `;
 
 export default HostUserForm;

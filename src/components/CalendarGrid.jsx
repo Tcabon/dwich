@@ -6,7 +6,7 @@ import '../styles/calendar.css';
 import styled from 'styled-components';
 import useUserDataReservation from '../hooks/useUserDataReservation';
 
-function CalendarGrid() {
+function CalendarGrid({ backgroundColor }) {
   const {selectedDate, setSelectedDate} = useUserDataReservation();
 
   const minDate = new Date();
@@ -34,22 +34,25 @@ function CalendarGrid() {
 
   return (
     <div>
-      <h2>Veuillez Selectionnez un jour dans le calendrier</h2>
-      <CalendarContainer>
+      <StyledCalendarContainer style={{ backgroundColor: "#fff" }}>
         <Calendar
-            onChange={handleDateChange}
-            value={selectedDate}
-            minDate={minDate} // Utilisation de la date minimale j+3
-            maxDate={maxDate} // Limite fixé a 180 jours
-            defaultActiveStartDate={new Date()}
-            tileClassName={tileClassName}
+          onChange={handleDateChange}
+          value={selectedDate}
+          minDate={minDate} // Utilisation de la date minimale j+3
+          maxDate={maxDate} // Limite fixé a 180 jours
+          defaultActiveStartDate={new Date()}
+          tileClassName={tileClassName}
         />
-      </CalendarContainer>
+      </StyledCalendarContainer>
     </div>
   );
 }
 
-const CalendarContainer = styled.div`
+const StyledCalendarContainer = styled.div`
+  background-color: ${(props) => props.backgroundColor || 'transparent'};
+  border-radius: 10px;
+  padding-bottom: 10px;
+
   .react-calendar {
     border: none;
     background: none;
@@ -62,10 +65,20 @@ const CalendarContainer = styled.div`
     }
   }
 
+  .react-calendar__navigation__prev2-button, .react-calendar__navigation__next2-button {
+    display: none;
+  }
+
+  .react-calendar__navigation button {
+    font-size: 1.5rem;
+    color: black; /* Couleur noire */
+  }
+
   .react-calendar__month-view__weekdays__weekday {
     abbr[title] {
       text-decoration: none;
-      color: #1A4133;
+      color: #000;
+      font-size: 1.5em;
     }
   }
   button {
@@ -74,20 +87,47 @@ const CalendarContainer = styled.div`
   
   .react-calendar__tile {
     font-size: 1rem;
-    color: #1A4133;
-    background: none;
+    color: #000;
     font-weight: 400;
+    display: flex;
+    justify-content: center;
+    padding: 3px 0 3px 0;
+    abbr {
+      display: grid;
+      width: 80%;
+      aspect-ratio: 1/1;
+      place-content: center;
+      border-color: #ccc;
+      border-style: solid;
+      border-width: 1px;
+      border-radius: 100%;
+    }
     &:disabled {
+      opacity: 0.5;
+      abbr {
+        border: none;
+      }
+    }
+  }
+
+  .react-calendar__month-view__days__day--neighboringMonth {
+    abbr {
+      border: none;
       opacity: 0.5;
     }
   }
   
-  .react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus {
-    background: #F2D621;
-    color: #000;
-    border-radius:3px;
-    box-shadow: rgba(50, 50, 93, 0.125) 0px 5px 10px -5px, rgba(0, 0, 0, 0.15) 0px 5px 10px -5px;
-
+  .react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus, .highlight {
+    background: none;
+    abbr {
+      opacity: 1;
+      background: #e39207;
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      border-radius: 100%;
+      box-shadow: rgba(50, 50, 93, 0.125) 0px 5px 10px -5px, rgba(0, 0, 0, 0.15) 0px 5px 10px -5px;
+    }
   }
 
   .react-calendar__tile:disabled {
@@ -103,15 +143,15 @@ const CalendarContainer = styled.div`
 
   .react-calendar__navigation button {
     font-size: 1.5rem;
-    color: #1A4133;
+    color: #000;
   }
   
   .react-calendar__navigation button:disabled {
     background: none;
   }
 
-  .highlight {
-    background-color: #F2D621;
-  };
+  .react-calendar__tile--now {
+    background: none;
+  }
 `
 export default CalendarGrid;

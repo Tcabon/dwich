@@ -7,7 +7,7 @@ import useCart from '../hooks/useCart';
 
 function MenuSelection() {
   const { cartEntries, addToCart, total, CartEntries } = useCart();
-  const { restaurantId } = useParams();
+  const { restaurantId, restaurantName } = useParams();
 
 
   // Simulons des éléments de menu pour la démonstration
@@ -19,7 +19,7 @@ function MenuSelection() {
 
   return (
     <div>
-      <h1>Sélection de Menu pour le restaurant {restaurantId}</h1>
+      <h1>Sélection de Menu pour le restaurant "{restaurantName}"</h1>
       <div>
         <h2>Menu :</h2>
         {menuItems.map(item => (

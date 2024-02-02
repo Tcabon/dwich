@@ -15,16 +15,17 @@ const UserDataReservationContextProvider = ({ children }) => {
   const [restaurantName, setRestaurantName] = useStateStorage('sessionRestaurantName');
   const { setGuestsList } = useLunch();
   const {setCartEntries} = useCart();
+  const [assignedCartEntries, setAssignedCartEntries] = useStateStorage('sessionAssignedCartEntries');
 
   const handleResetDataReservation = () => {
-    console.log("reset");
     setGuestsList([]);
     setSelectedDate(new Date());
     setGuestCount(0);
     setTown(null);
     setDinnerHour(null);
     setRestaurantName(null);
-    setCartEntries(null);
+    setCartEntries([]);
+    setAssignedCartEntries(null);
   };
 
   return (

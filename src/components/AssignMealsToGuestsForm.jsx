@@ -15,14 +15,12 @@ const AssignMealsToGuestsForm = (props) => {
   const {guestsList, setGuestsList} = useLunch();
 
   const findObjectsWithMatchingIds = () => {
-    // Find objects from array1 with IDs that match any ID in array2
     return assignedCartEntries.filter((obj1) =>
       selectedCartEntryIds.includes(obj1.cartEntryId)
     );
   };
 
   const findObjectsWithoutMatchingIds = () => {
-    // Find objects from array1 with IDs that match any ID in array2
     return assignedCartEntries.filter((obj1) =>
       !selectedCartEntryIds.includes(obj1.cartEntryId)
     );
@@ -30,11 +28,9 @@ const AssignMealsToGuestsForm = (props) => {
 
   const updateAssignedValue = () => {
     return guestsList.map((object) => {
-      // If the object has the specified userId, update its assignedValue
       if (object.userId === selectedOption) {
         return { ...object, assignedCartEntries: [...findObjectsWithMatchingIds(), ...object.assignedCartEntries] };
       }
-      // Otherwise, return the object as is
       return object;
     });
   };
@@ -58,15 +54,12 @@ const AssignMealsToGuestsForm = (props) => {
             onChange={() => setSelectedOption(guest.userId)}
           />
           {guest.name}
-          
         </div>
       ))}
-      
       </form>
       <button onClick={() => handleAddCartEntriesToUser()}>
-            feu
+        Confirmer l'assignation de plats
       </button>
-    
     </StyledAssignMealsToGuestsForm>
   )
 }

@@ -22,3 +22,13 @@ emailjs
 Kx?7aZog*njeSyQ3WM!6Tw
 
 home
+
+Faut il revenir au calendrier ou a l'écran titre
+Nous devrions nous pas mettre l'heure du diner avec le reste des options de reservations ?
+
+{ id: 5, count: 5, label: '5'},
+  { id: 6, count: 6, label: '6'},
+  { id: 7, count: 10 ????????, label: '7 et +'}
+
+
+\\wsl$
