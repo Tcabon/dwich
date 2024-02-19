@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import useUserDataReservation from '../hooks/useUserDataReservation';
+import useUserDataReservation from '../../hooks/useUserDataReservation';
+import Button from '../common/Button';
 
 const hours = [
     { id: 1, hour: '11:30' },
@@ -12,6 +13,14 @@ const hours = [
     { id: 6, hour: '14:00' },
     { id: 7, hour: '14:30' },
 ];
+
+const ContinueDisplay = () => {
+  return (
+    <div>
+      Continuer
+    </div>
+  )
+};
 
 const Restaurant = ({ id, name, description }) => {
   const { setDinnerHour, setRestaurantName } = useUserDataReservation();
@@ -50,7 +59,7 @@ const Restaurant = ({ id, name, description }) => {
           </StyledDateButton>
         ))}
       </StyledDatepicker>
-      <StyledButton onClick={handleReservation}>Réserver</StyledButton>
+      <Button action={handleReservation} Display={ContinueDisplay} />
     </StyledRestaurantContainer>
   );
 }
@@ -60,10 +69,12 @@ const StyledRestaurantContainer = styled.div`
   border-radius: 10px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  padding: 20px;
 `;
 
 const StyledImageContainer = styled.div`
   height: 120px;
+  border-radius: 10px;
   background: url("https://www.spoon-restaurant.com/wp-content/uploads/2022/06/Spoon_cLe_Bonbon-1-scaled.jpg") center/cover no-repeat;
 `;
 

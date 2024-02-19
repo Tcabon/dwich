@@ -11,7 +11,13 @@ const Button = ({ action, Display }) => {
 }
 
 const StyledWrapperButton = styled.button`
-
+  width: 100%;
+  margin: 10px 0 5px 0;
+  height: 30px;
+  background: linear-gradient(to right, #e39207, #9ACD32);
+  border: none; /* Supprime la bordure */
+  border-radius: 10px; /* Ajoute des coins arrondis */
+  color: white;
 `;
 
 export default Button;

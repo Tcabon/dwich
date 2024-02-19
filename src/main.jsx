@@ -5,7 +5,6 @@ import './css/normalize.css';
 import './css/styles.css';
 import UserDataReservationContextProvider from "./contexts/UserDataReservationContext"
 import CartContextProvider from './contexts/CartContext';
-import RecapBar from "./components/RecapBar.jsx";
 import LunchContextProvider from './contexts/LunchContext.jsx';
 import ReservationHome from './pages/ReservationHome.jsx';
 import MenuSelection from './pages/MenuSelection.jsx';

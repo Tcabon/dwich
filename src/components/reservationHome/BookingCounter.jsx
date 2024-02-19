@@ -1,5 +1,5 @@
 import React from "react";
-import useUserDataReservation from '../hooks/useUserDataReservation';
+import useUserDataReservation from '../../hooks/useUserDataReservation';
 import styled from 'styled-components';
 
 const guestCountsFields = [
@@ -8,20 +8,18 @@ const guestCountsFields = [
   { id: 3, count: 3, label: '3' },
   { id: 4, count: 4, label: '4'},
   { id: 5, count: 5, label: '5'},
-  { id: 6, count: 6, label: '6'},
-  { id: 7, count: 10, label: '7+'}
+  { id: 6, count: 6, label: '6+'},
 ];
 
-const BookingCounter = ({ backgroundColor }) => {
+const BookingCounter = ({ hasError, setGuestCountError }) => {
   const {guestCount, setGuestCount} = useUserDataReservation();
 
-
   const handleGuestCountChange = (elem) => {
+    setGuestCountError(false);
     setGuestCount(elem);
   };
-
     return (
-      <StyledBookingCounterContainer style={{ backgroundColor: "#fff" }}>
+      <StyledBookingCounterContainer $hasError={hasError}>
         <StyledTitle>Personne en coin de table !</StyledTitle>
         <StyledBookingCounter >
           {guestCountsFields.map(elem => {
@@ -42,11 +40,12 @@ const BookingCounter = ({ backgroundColor }) => {
 }
 
 const StyledBookingCounterContainer = styled.div`
-  background-color: ${(props) => props.backgroundColor || 'transparent'};
+  background-color: #fff;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  border: 2px solid ${props => props.$hasError ? "red" : "transparent"};
 `
 
 const StyledBookingCounter = styled.div`
@@ -55,25 +54,30 @@ const StyledBookingCounter = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
+  gap: 10px;
 `
 
 const StyledSelectedCount = styled.button`
-  background-color: #e39207; /* Couleur de fond */
-  border: none;
-  border-radius: 5px;
-  color: #fff; /* Couleur du texte */
-  font-size: 1.2rem;
-  margin-left: 10px;
-
+  display: grid;
+  width: 12%;
+  aspect-ratio: 1/1;
+  place-content: center;
+  border-color: #ccc;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 100%;
+  background: transparent;
   &.selected {
-    background-color: #F2D621;
+    background-color: #e39207;
+    color: #fff;
+    border: none;
+    font-weight: 600;
   }
 `
 
 const StyledTitle = styled.h1`
   font-size: 1.5em;
-  margin: 20px 0 0 0;
-  padding-left: 15px;
+  padding: 20px 0 0 20px;
 `;
 
 

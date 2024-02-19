@@ -1,5 +1,5 @@
 import React, { createContext, useMemo} from "react";
-import CartEntry from "../components/CartEntry";
+import CartEntry from "../components/menuSelection/CartEntry";
 import useStateStorage from "../hooks/useStateStorage";
 
 export const CartContext = createContext();

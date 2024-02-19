@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import NotificationToaster from "./NotificationToaster";
-import useLunch from "../hooks/useLunch";
-import isCustomEmailValid from "../methods/isCustomEmailValid";
-import generateUniqueId from "../methods/generateUniqueId";
+import NotificationToaster from "../common/NotificationToaster";
+import useLunch from "../../hooks/useLunch";
+import isCustomEmailValid from "../../methods/isCustomEmailValid";
+import generateUniqueId from "../../methods/generateUniqueId";
 
 const AddGuestsToOrder = () => {
   const { guestsList, setGuestsList, guestCount } = useLunch();

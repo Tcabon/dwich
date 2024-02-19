@@ -54,6 +54,7 @@ const Styledh2 = styled.h2`
   font-size: 1.8em;
   font-weight: 600;
   text-align: left;
+  margin: 10px 0 10px 0;
 `;
 
 const StyledText = styled.p`

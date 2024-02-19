@@ -17,7 +17,7 @@ const ContactUsPro = () => {
 
   return (
     <StyledContactUsPro>
-      <p>Vous souhaitez inscrire votre restaurant</p>
+      <StyledText>Vous souhaitez inscrire votre restaurant</StyledText>
       <Styledh2>C'est gratuit !</Styledh2>
       <Button action={handleButtonClick} Display={ContactUsDisplay} />
     </StyledContactUsPro>
@@ -30,7 +30,12 @@ const StyledContactUsPro = styled.div`
   border-radius: 10px;
 `;
 
+const StyledText = styled.p`
+  font-size: 1.2em;
+`;
+
 const Styledh2 = styled.h2`
+  margin-top: 8px;
   font-size: 3em;
 `;
 

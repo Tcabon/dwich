@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import styled from "styled-components";
-import ModalToaster from "./ModalToaster";
+import ModalToaster from "../common/ModalToaster";
 import AssignMealsToGuestsForm from "./AssignMealsToGuestsForm";
-import useLunch from "../hooks/useLunch";
+import useLunch from "../../hooks/useLunch";
 
 const AssignMealsToGuests = ({assignedCartEntries, setAssignedCartEntries}) => {
   const [selectedCartEntryIds, setSelectedCartEntryIds] = useState([]);

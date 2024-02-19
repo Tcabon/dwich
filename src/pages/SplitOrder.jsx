@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import useCart from '../hooks/useCart';
 import useStateStorageWithDefault from "../hooks/useStateStorageWithDefault";
-import AddGuestsToOrder from "../components/AddGuestsToOrder";
-import ModalToaster from "../components/ModalToaster";
-import AssignMealsToGuests from "../components/AssignMealsToGuests";
-import ConfirmOrder from "../components/ConfirmOrder";
+import AddGuestsToOrder from "../components/splitOrder/AddGuestsToOrder";
+import ModalToaster from "../components/common/ModalToaster";
+import AssignMealsToGuests from "../components/splitOrder/AssignMealsToGuests";
+import ConfirmOrder from "../components/common/ConfirmOrder";
 
 const SplitOrder = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,7 +13,7 @@ const SplitOrder = () => {
   const [assignedCartEntries, setAssignedCartEntries] = useStateStorageWithDefault('sessionAssignedCartEntries', cartEntries);
 
   return (
-    <StyledSplitOrder>
+    <StyledSplitOrder >
       <button onClick={() => setIsModalOpen(true)}>Ajouter ou retirer Convives</button>
       <ModalToaster title='Ajouter Convives' content={AddGuestsToOrder} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       <AssignMealsToGuests assignedCartEntries={assignedCartEntries} setAssignedCartEntries={setAssignedCartEntries} />

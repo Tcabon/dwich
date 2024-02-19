@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import MenuItem from '../components/MenuItem';
-import Total from '../components/Total';
-import useUserDataReservation from '../hooks/useUserDataReservation';
+import MenuItem from '../components/menuSelection/MenuItem';
+import Total from '../components/menuSelection/Total';
 import useCart from '../hooks/useCart';
 
 function MenuSelection() {

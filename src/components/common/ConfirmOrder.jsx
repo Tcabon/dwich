@@ -1,10 +1,10 @@
 import React from "react";
 import emailjs from 'emailjs-com';
 import styled from "styled-components";
-import useCart from '../hooks/useCart';
-import useUserDataReservation from "../hooks/useUserDataReservation";
+import useCart from '../../hooks/useCart';
+import useUserDataReservation from "../../hooks/useUserDataReservation";
 import { useNavigate } from 'react-router-dom';
-import useLunch from "../hooks/useLunch";
+import useLunch from "../../hooks/useLunch";
 
 const ConfirmOrder = ({ emailTemplate }) => {
   const { cartEntries, total } = useCart();

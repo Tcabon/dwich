@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
-import ConfirmOrder from './ConfirmOrder';
-import useUserDataReservation from '../hooks/useUserDataReservation';
+import ConfirmOrder from '../common/ConfirmOrder';
+import useUserDataReservation from '../../hooks/useUserDataReservation';
 
 
 function Total({ cart, total }) {

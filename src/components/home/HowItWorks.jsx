@@ -6,22 +6,27 @@ const HowItWorks = () => {
       <StyledOl>
         <StyledLi>
           <StyledCircle>1</StyledCircle>
-          Sélectionnez un restaurant
+          <StyledText>Sélectionnez un restaurant</StyledText>
         </StyledLi>
         <StyledLi>
           <StyledCircle>2</StyledCircle>
-          Choisissez vos plats
+          <StyledText>Choisissez vos plats</StyledText>
         </StyledLi>
         <StyledLi>
           <StyledCircle>3</StyledCircle>
-          Invitez vos amis
+          <StyledText>Invitez vos amis</StyledText>
         </StyledLi>
         <StyledLi>
           <StyledCircle>4</StyledCircle>
-          Attribuez les plats
+          <StyledText>Attribuez les plats</StyledText>
         </StyledLi>
       </StyledOl>
-      <h3>Mangez en toute tranquilité</h3>
+      <StyledLastPart>
+        <StyledIcone>
+          &#9996;
+        </StyledIcone>
+        <StyledH3>Mangez en toute tranquilité</StyledH3>
+      </StyledLastPart>
     </StyledHowItWorksWrapper>
   )
 }
@@ -30,6 +35,17 @@ const StyledHowItWorksWrapper = styled.div`
   background-color: #fff;
   padding: 10px 0px 10px 0px;
   border-radius: 10px;
+`;
+
+const StyledOl = styled.ol`
+  padding-left: 20px;
+  list-style-type: none;
+`;
+
+const StyledLi = styled.li`
+  display: flex;
+  position: relative;
+  padding: 5px;
 `;
 
 const StyledCircle = styled.div`
@@ -49,16 +65,23 @@ const StyledCircle = styled.div`
   margin-right: 10px; /* Espace entre le cercle et le texte de la liste */
 `;
 
-const StyledOl = styled.ol`
-  padding-left: 20px;
-  list-style-type: none;
+const StyledText = styled.p`
+  padding-left: 17px;
 `;
 
-const StyledLi = styled.li`
-  position: relative;
-  padding-left: 20px;
-  padding: 5px;
-  list-style: none;
+const StyledIcone = styled.div`
+  margin-right: 10px;
+`;
+
+const StyledLastPart = styled.div`
+  display: flex; /* Ajout de l'affichage flex */
+  align-items: center; /* Ajout de l'alignement vertical */
+  padding: 5px 0 0 23px;
+
+`;
+
+const StyledH3 = styled.h3`
+  font-weight: 600;
 `;
 
 export default HowItWorks

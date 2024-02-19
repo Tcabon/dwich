@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { differenceInCalendarDays } from "date-fns"
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import '../styles/calendar.css';
+import '../../styles/calendar.css';
 import styled from 'styled-components';
-import useUserDataReservation from '../hooks/useUserDataReservation';
+import useUserDataReservation from '../../hooks/useUserDataReservation';
 
 function CalendarGrid({ backgroundColor }) {
   const {selectedDate, setSelectedDate} = useUserDataReservation();

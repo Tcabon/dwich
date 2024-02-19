@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Autocomplete from "react-google-autocomplete";
 import styled from 'styled-components';
-import useUserDataReservation from '../hooks/useUserDataReservation';
+import useUserDataReservation from '../../hooks/useUserDataReservation';
 import { useNavigate } from 'react-router-dom';
 
-const AutoCompleteGoogle = ({ backgroundColor }) => {
+const AutoCompleteGoogle = ({ hasError, setTownError }) => {
   const {selectedDate, guestCount, setTown} = useUserDataReservation();
+  const [hasPostalCodeError, setHasPostalCodeError] = useState(false);
   const navigate = useNavigate();
 
   const getElementFromGoogleMapsObject = (apiObject, type) => {
@@ -21,25 +22,27 @@ const AutoCompleteGoogle = ({ backgroundColor }) => {
   }
 
   const handlePlaceSelect = place => {
-    const town = getElementFromGoogleMapsObject(place, "locality") || getElementFromGoogleMapsObject(place, "postal_code");
+    const town = getElementFromGoogleMapsObject(place, "postal_code");
+    if (!town) {
+      setHasPostalCodeError(true);
+      setTownError(true);
+    }
     setTown(town);
-    if (getElementFromGoogleMapsObject(place, "postal_code") !== null) {
-      navigate(`/restaurants-list/${getElementFromGoogleMapsObject(place, "postal_code")}`);
-    }
-    else {
-      navigate(`/restaurants-list/${getElementFromGoogleMapsObject(place, "locality")}`);
-    }
   };
 
   return (
-    <StyledAutoCompleteContainer style={{ backgroundColor: "#fff" }}>
+    <StyledAutoCompleteContainer $hasError={hasError}>
       <StyledTitle>Avec une adresse c'est toujours mieux :</StyledTitle>
+      {hasPostalCodeError && (
+        <div>PAS BONNN</div>
+      )}
       <StyledAutoComplete>
         <Autocomplete
           apiKey={'AIzaSyDjnSesrQA-c56OERPP6ObwQZlnwof1zRs'}
           onPlaceSelected={(place) => {
             handlePlaceSelect(place);
           }}
+          onFocus={() => setTownError(false)}
           options={{ types: ['(regions)'], componentRestrictions: { country: 'fr' } }}
         />
       </StyledAutoComplete>
@@ -50,28 +53,29 @@ const AutoCompleteGoogle = ({ backgroundColor }) => {
 const StyledAutoCompleteContainer = styled.div`
   margin: 0 15px 0 15px;
   border-radius: 10px;
+  background-color: #fff;
+  border: 2px solid ${props => props.$hasError ? "red" : "transparent"};
 `;
 
 const StyledAutoComplete = styled.div`
-
   .pac-target-input {
-    border-radius: 10px;
     width: 100%;
     height: 40px;
-    border: none;
     padding: 0 0 0 10px;
     width: calc(100% - 10px);
     font-size: 1.2rem;
     background-color: #FFF;
     color: #1A4133;
+    border: none;
   }
-  margin-bottom: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
 `;
 
 const StyledTitle = styled.h1`
   font-size: 1.5em;
-  margin: 15px 0 10px 0;
-  padding-left: 15px;
+  margin: 0 0 10px 0;
+  padding: 20px 0 0 20px;
   text-align: left;
 `;
 

@@ -46,7 +46,7 @@ const HostUserForm = () => {
         </StyledRow>
           <StyledInputEmail
             type='email'
-            placeholder='email'
+            placeholder='Adresse e-mail'
             {...register("email", {
               required: true,
               validate: isCustomEmailValid, // Utilisation de la validation personnalisée
@@ -55,7 +55,7 @@ const HostUserForm = () => {
           {errors.email && (
             <span style={{ color: "red" }}>{errors.email.message}</span>
           )}
-        <button type='submit'>Réserver</button>
+        <StyledButton type='submit'>Réserver</StyledButton>
       </StyledForm>
     </StyledWrapper>
   )
@@ -80,12 +80,16 @@ const StyledRow = styled.div`
 const StyledInputName = styled.input`
   padding: 8px;
   flex: 1;
-  width: 48% /* Ajout de marge à droite pour séparer les champs */
+  width: calc(50% - 5px); /* Largeur de 50% moins la marge */
+  border: none;
+  border-bottom: 1px solid grey;
 `;
 
 const StyledInputEmail = styled.input`
   align-self: stretch;
   padding: 8px;
+  border: none;
+  border-bottom: 1px solid grey;
 `;
 
 const StyledForm = styled.form`
@@ -104,5 +108,15 @@ const StyledText = styled.p`
   font-size: 1.5em;
   font-style: normal;
 `;
+
+const StyledButton = styled.button`
+  width: 100%;
+  margin: 10px 0 5px 0;
+  height: 30px;
+  background: linear-gradient(to right, #e39207, #9ACD32);
+  border: none;
+  border-radius: 10px;
+  color: white;
+`
 
 export default HostUserForm;
