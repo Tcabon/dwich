@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import useUserDataReservation from '../../hooks/useUserDataReservation';
 import { useNavigate } from 'react-router-dom';
+import { format } from "date-fns";
+import fr from 'date-fns/locale/fr';
 import Button from "./Button";
+import backArrow from '@/assets/icons/backArrow.png';
+
 
 const RecapBar = () => {
-  const { selectedDate, guestCount, town, dinnerHour, handleResetDataReservation } = useUserDataReservation();
+  const { selectedDate, guestCount, town, handleResetDataReservation } = useUserDataReservation();
   const navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
 
@@ -28,71 +32,95 @@ const RecapBar = () => {
 
   return (
     <StyledRecapBar $expanded={expanded}>
-      <StyledRecapHead onClick={toggleExpanded}>
+      <StyledRecapHeader onClick={toggleExpanded}>
         <StyledRecapTitle>Récapitulatif</StyledRecapTitle>
-        <StyledToggleArrow $expanded={expanded}>&#8679;</StyledToggleArrow>
-      </StyledRecapHead>
-      {expanded && (
-        <>
+        <StyledToggleArrow $expanded={expanded}><StyledArrowIcon src={backArrow} /></StyledToggleArrow>
+      </StyledRecapHeader>
           <StyledInfos>
-            <p>Pour le {selectedDate ? selectedDate.toDateString() : "pas de date"}</p>
-            <p>Nombres de dwicheurs : {guestCount ? guestCount.label : <label>2 personnes</label>} </p>
-            <p>Ville : {town}</p>
-            <p>Horaire : {dinnerHour}</p>
+            <StyledSingleInfo><StyledPrefix>Pour le</StyledPrefix> {(selectedDate !== null) ? <StyledSelectedChoice>{format(selectedDate, 'dd MMMMMMMMM yyyy')}</StyledSelectedChoice> : "pas de date"}</StyledSingleInfo>
+            <StyledSingleInfo><StyledPrefix>Avec</StyledPrefix> {guestCount ? <StyledSelectedChoice>{guestCount.label} personnes</StyledSelectedChoice> : <StyledPlaceholder>2 personnes</StyledPlaceholder>}</StyledSingleInfo>
+            <StyledSingleInfo><StyledPrefix>À</StyledPrefix> {town ? <StyledSelectedChoice>{town}</StyledSelectedChoice> : <StyledPlaceholder>Ville, code postal, adresse</StyledPlaceholder>}</StyledSingleInfo>
+            <Button action={handleResetClick} Display={resetDisplay} />
           </StyledInfos>
-          <Button action={handleResetClick} Display={resetDisplay} />
-        </>
-      )}
     </StyledRecapBar>
   );
 };
 
 const StyledRecapBar = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: flex-start;
-  height: ${props => props.$expanded ? 'auto' : '50px'};
-  overflow: hidden;
+  max-height: ${props => props.$expanded ? '300px' : '50px'};
   background-color: #FFF;
   border-radius: 10px 10px 0 0;
-  padding: ${props => props.$expanded ? '0 20px' : '0 20px'};
-  box-shadow: 0px 5px 25px 10px rgba( 0, 0, 0, 0.1);
   position: fixed;
-  bottom: 0; /* Décalage vers le haut */
+  bottom: 0;
   left: 0;
-  width: calc(100% - 40px);
   z-index: 100;
-  font-size: 1rem;
-  color: black;
   background-color: #FFF;
-  transition: height 0.3s, padding 0.3s, bottom 0.3s;
+  transition: max-height 0.2s cubic-bezier(0.17, 0.67, 0.76, 0.71);
 `;
 
-const StyledRecapHead = styled.div`
+const StyledRecapHeader = styled.div`
   display: flex;
-  justify-content: space-between; /* Permet d'espacer les éléments sur toute la largeur */
-  width: calc(100% - 40px);
+  justify-content: space-between;
+  padding: 8px 16px;
 `;
 
-const StyledToggleArrow = styled.span`
+const StyledToggleArrow = styled.div`
   cursor: pointer;
-  font-size: 1.5rem;
   transition: transform 0.3s;
-  transform: ${props => props.$expanded ? 'rotate(180deg)' : 'rotate(0)'};
+  transform: ${props => props.$expanded ? 'rotate(270deg)' : 'rotate(90deg)'};
   position: absolute;
   top: 5px;
-  right: 20px;
-  color: black;
+  right: 4px;
+`;
+
+const StyledArrowIcon = styled.img`
+
 `;
 
 const StyledRecapTitle = styled.h2`
   margin: 10px 0; 
   color: black;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 2em;
 `;
 
 const StyledInfos = styled.div`
-  
+  padding: 20px 24px 35px 24px;
+  text-align: left;
+`;
+
+const StyledSingleInfo = styled.div`
+  padding: 10px 0;
+  display: flex;
+  align-items: end;
+  &:nth-child(3) {
+    margin-bottom: 20px;
+  };
+`;
+
+const StyledPrefix = styled.p`
+  font-size: 1.6em;
+`;
+
+const StyledSelectedChoice = styled.p`
+  margin-left: 6px;
+  font-size: 2em;
+  font-weight: 700;
+`;
+
+const StyledPlaceholder = styled.label`
+  position: relative;
+  top: 4px;
+  width: 100%;
+  margin-left: 6px;
+  padding-bottom: 3px;
+  opacity: 0.5;
+  border-bottom: 1px solid #919EAB;
+  font-size: 1.6em;
 `;
 
 export default RecapBar;

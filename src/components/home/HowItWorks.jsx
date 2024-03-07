@@ -1,4 +1,6 @@
-import styled from "styled-components"
+import styled from "styled-components";
+import clapIcon from "../../assets/icons/clapIcon.png";
+
 
 const HowItWorks = () => {
   return (
@@ -20,20 +22,18 @@ const HowItWorks = () => {
           <StyledCircle>4</StyledCircle>
           <StyledText>Attribuez les plats</StyledText>
         </StyledLi>
+        <StyledLi>
+          <StyledIcon src={clapIcon} alt="clap icon" />
+          <StyledH3>Mangez en toute tranquilité</StyledH3>
+        </StyledLi>
       </StyledOl>
-      <StyledLastPart>
-        <StyledIcone>
-          &#9996;
-        </StyledIcone>
-        <StyledH3>Mangez en toute tranquilité</StyledH3>
-      </StyledLastPart>
     </StyledHowItWorksWrapper>
   )
 }
 
 const StyledHowItWorksWrapper = styled.div`
   background-color: #fff;
-  padding: 10px 0px 10px 0px;
+  padding: 20px 0 20px 0;
   border-radius: 10px;
 `;
 
@@ -44,44 +44,42 @@ const StyledOl = styled.ol`
 
 const StyledLi = styled.li`
   display: flex;
+  align-items: center;
   position: relative;
   padding: 5px;
 `;
 
 const StyledCircle = styled.div`
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 16px; /* Ajustez la taille du cercle selon vos besoins */
-  height: 16px; /* Ajustez la taille du cercle selon vos besoins */
+  width: 30px; 
+  height: 30px; 
   border-radius: 50%;
-  background-color: #e39207; /* Utilisez la couleur spécifiée */
+  background-color: #e39207;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
-  color: #fff; /* Couleur du texte à l'intérieur du cercle */
-  margin-right: 10px; /* Espace entre le cercle et le texte de la liste */
+  font-weight: 400;
+  font-size: 1.4em;
+  color: #fff;
+  margin-right: 10px;
+
 `;
 
 const StyledText = styled.p`
-  padding-left: 17px;
+  font-size: 1.6em;
+  font-weight: 400;
 `;
 
-const StyledIcone = styled.div`
+const StyledIcon = styled.img`
   margin-right: 10px;
-`;
-
-const StyledLastPart = styled.div`
-  display: flex; /* Ajout de l'affichage flex */
-  align-items: center; /* Ajout de l'alignement vertical */
-  padding: 5px 0 0 23px;
-
+  width: 26px;
+  padding: 0 2px;
 `;
 
 const StyledH3 = styled.h3`
-  font-weight: 600;
+  position: relative;
+  font-weight: 700;
+  font-size: 1.6em;
+  top: 2px;
 `;
 
 export default HowItWorks

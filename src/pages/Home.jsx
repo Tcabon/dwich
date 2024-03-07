@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import HostUserForm from "../components/home/HostUserForm";
-import imageAccueil from "../assets/images/imageAccueil.svg"
+import imageAccueil from "../assets/images/imageAccueil.svg";
 import HowItWorks from "../components/home/HowItWorks";
 import ContactUsPro from "../components/home/ContactUsPro";
 
@@ -12,7 +12,7 @@ const Home = () => {
         <StyledImage src={imageAccueil} alt="Image Accueil" />
       </StyledCenteredImage>
       <StyledContentWrapper>
-        <Styledh1>Anticipez chaque bouchée</Styledh1>
+        <Styledh1>Anticipez chaque bouchée !</Styledh1>
         <StyledText>Economisez du temps, réservez vos plats à l'avance!</StyledText>
         <HostUserForm />
         <Styledh2>Comment ça marche ?</Styledh2>
@@ -31,7 +31,7 @@ const StyledHomeWrapper = styled.div`
 const StyledContentWrapper = styled.div`
   max-width: 800px; /* ou une valeur qui convient à votre mise en page */
   margin: 0 auto; /* Centre le contenu horizontalement */
-  padding: 15px;
+  padding: 20px 20px 80px 20px;
 `;
 
 const StyledCenteredImage = styled.div`
@@ -44,21 +44,21 @@ const StyledImage = styled.img`
 `;
 
 const Styledh1 = styled.h1`
-  font-size: 2.4em;
-  font-weight: 600;
+  font-size: 3.2em;
+  font-weight: 700;
   text-align: left;
   line-height: 1.2em;
 `;
 
 const Styledh2 = styled.h2`
-  font-size: 1.8em;
-  font-weight: 600;
+  font-size: 2.2em;
+  font-weight: 700;
   text-align: left;
-  margin: 10px 0 10px 0;
+  margin: 20px 0;
 `;
 
 const StyledText = styled.p`
-  font-size: 1.2em;
+  font-size: 1.6em;
   margin: 16px 0px 16px 0px;
   text-align: left;
   line-height: 1.6em;

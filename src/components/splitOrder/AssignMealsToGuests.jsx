@@ -2,49 +2,32 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import ModalToaster from "../common/ModalToaster";
 import AssignMealsToGuestsForm from "./AssignMealsToGuestsForm";
-import useLunch from "../../hooks/useLunch";
+import Button from "../common/Button";
 
-const AssignMealsToGuests = ({assignedCartEntries, setAssignedCartEntries}) => {
+const AssignMealsToGuests = ({assignedCartEntries}) => {
   const [selectedCartEntryIds, setSelectedCartEntryIds] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const {guestsList, setGuestsList} = useLunch();
 
-  const removeCartEntryFromGuest = (userId, assignedCartEntryId) => {
-    console.log(assignedCartEntryId);
-    const updatedGuests = guestsList.map((guest) =>
-      guest.userId === userId
-        ? {
-            ...guest,
-            assignedCartEntries: guest.assignedCartEntries.filter(
-              (entry) => entry.cartEntryId !== assignedCartEntryId
-            ),
-          }
-        : guest
-    );
-    console.log(updatedGuests);
-    return updatedGuests;
-  };
-
-  const handleRemoveCartEntryFromGuest = (entry, userId) => {
-    setAssignedCartEntries(() => [...assignedCartEntries, entry]);
-    setGuestsList(() => removeCartEntryFromGuest(userId, entry.cartEntryId))
-  };
+  const assignMealDisplay = () => {
+    return (
+      <div>
+        Attribuer 
+      </div>
+    )
+  }
 
   const handleCheckboxChange = (entryId) => {
-    // Check if the entryId is already in the selectedCartEntryIds array
     if (selectedCartEntryIds.includes(entryId)) {
-      // If it's already selected, remove it
       setSelectedCartEntryIds((prevSelected) =>
         prevSelected.filter((id) => id !== entryId)
       );
     } else {
-      // If it's not selected, add it
       setSelectedCartEntryIds((prevSelected) => [...prevSelected, entryId]);
     }
   };
 
   const sortedData = assignedCartEntries.sort((a, b) => {
-    const nameA = a.name.toLowerCase(); // Convert names to lowercase for case-insensitive sorting
+    const nameA = a.name.toLowerCase();
     const nameB = b.name.toLowerCase();
     if (nameA < nameB) {
       return -1;
@@ -55,56 +38,111 @@ const AssignMealsToGuests = ({assignedCartEntries, setAssignedCartEntries}) => {
     return 0;
   });
 
+
   return (
-    <StyledAssignMealsToGuests>
+    <StyledContentWrapper>
+      <StyledAssignMealTitle>Attribuez les plats</StyledAssignMealTitle>
       {sortedData.map((entry, index) => (
-        <div key={index}>
-          <input
+        <StyledMealEntry key={index}>
+          <StyledInput
             type="checkbox"
             checked={selectedCartEntryIds.includes(entry.cartEntryId)}
             onChange={() => handleCheckboxChange(entry.cartEntryId)}
           />
-          {entry.name}
-        </div>
+          <StyledEntryName>1x {entry.name}</StyledEntryName>
+          <StyledEntryPrice>{entry.price} €</StyledEntryPrice>
+        </StyledMealEntry>
       )
     )}
     {assignedCartEntries && assignedCartEntries != 0 && (
-      <button onClick={() => setIsModalOpen(true)}>Assigner Plats</button>
+      <StyledButtonContainer>
+        <Button action={() => setIsModalOpen(true)} Display={assignMealDisplay} />
+      </StyledButtonContainer>
     )}
-    {guestsList.map((guest, guestIndex) => (
-      <div key={guestIndex}>
-        <div>
-          {guest.name}
-        </div>
-        <div>
-          {guest.assignedCartEntries.map((entry, entryIndex) => (
-            <div key={entryIndex}>
-              {entry.name}
-              { entry.price}
-              <div onClick={() => handleRemoveCartEntryFromGuest(entry, guest.userId)}>
-                X
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    ))}
     <ModalToaster
       title='Assigner plats'
       content={AssignMealsToGuestsForm}
       isModalOpen={isModalOpen}
       setIsModalOpen={setIsModalOpen}
       assignedCartEntries={assignedCartEntries}
-      setAssignedCartEntries={setAssignedCartEntries}
       selectedCartEntryIds={selectedCartEntryIds}
       setSelectedCartEntryIds={setSelectedCartEntryIds}
     />
-    </StyledAssignMealsToGuests>
+    </StyledContentWrapper>
   )
 };
 
-const StyledAssignMealsToGuests = styled.div`
+const StyledContentWrapper = styled.div`
+  width: 100%;
+`;
 
+const StyledAssignMealTitle = styled.p`
+  text-align: left;
+  margin: 20px 0 15px 20px;
+  font-size: 1.6em;
+`;
+
+const StyledMealEntry = styled.div`
+  background-color: #fff;
+  margin: 5px 20px;
+  display: flex;
+  text-align: left;
+  border-radius: 5px;
+  align-items: center;
+  padding: 8px 0;
+`;
+
+const StyledInput = styled.input`
+  width: 20px;
+  height: 20px;
+  margin-left: 20px;
+  /* Cache la case à cocher par défaut */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  /* Style la nouvelle case à cocher */
+  &:checked {
+    background-color: orange; /* Couleur de fond orange lorsque la case est cochée */
+  }
+  /* Style le faux élément qui remplacera la case à cocher */
+  &:before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid orange; /* Bordure orange */
+    border-radius: 3px; /* Bordure arrondie */
+    position: relative;
+    top: 3px;
+    left: -2px;
+  }
+  /* Style le signe de validation de la case à cocher */
+  &:checked:after {
+    content: "\\2714"; /* Code Unicode du signe de validation */
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: white; /* Couleur blanche du signe de validation */
+    position: relative;
+    top: -19px;
+    left: 2px;
+`;
+
+const StyledEntryName = styled.p`
+  font-size: 1.3em;
+  margin-left: 10px;
+`;
+
+const StyledEntryPrice = styled.p`
+  font-size: 1.3em;
+  font-weight: 600;
+  margin-left: auto;
+  margin-right: 20px;
+`;
+
+const StyledButtonContainer = styled.div`
+  margin: 0 20px;
 `;
 
 export default AssignMealsToGuests;

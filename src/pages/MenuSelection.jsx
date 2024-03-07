@@ -1,41 +1,123 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import MenuItem from '../components/menuSelection/MenuItem';
 import Total from '../components/menuSelection/Total';
+import RecapPlats from '../components/common/RecapPlats';
 import useCart from '../hooks/useCart';
+import styled from 'styled-components';
+import backArrow from '@/assets/icons/backArrow.png';
 
 function MenuSelection() {
   const { cartEntries, addToCart, total, CartEntries } = useCart();
-  const { restaurantId, restaurantName } = useParams();
+  
+  const navigate = useNavigate();
 
+  const handlePreviousButtonClick = () => {
+    navigate(-1);
+  };
 
   // Simulons des éléments de menu pour la démonstration
-  const menuItems = [
-    { id: 1, name: 'Salade parisienne', price: 10 },
-    { id: 2, name: 'Fat burger sa mère', price: 15 },
-    { id: 3, name: 'Spécialité de la cheffe', price: 25}
-  ];
+  const menuItems = {
+    entries: [
+      { id: 1, name: 'La burratina', description: 'Burata Crémeuse et son mesclun de salade', price: 10.5 },
+      { id: 2, name: 'Oeuf cocotte à la truffe', description: 'Oeuf en cocotte crème de truffe et San Daniel en mouillette', price: 10.5 },
+      { id: 3, name: 'Ceviche de poulpe', description: 'Quinoa à la coriandre et tranche de poulpe', price: 10.5 }
+    ],
+    plats: [
+      { id: 4, name: 'Involtini', description: 'Roulé de veau aubergine et mozzarella', price: 10.5 },
+      { id: 5, name: 'Pizza Peperoni', description: 'Tomate mozzarella picorions Sardo salami piquant olives et poivrons', price: 10.5 },
+      { id: 6, name: 'Lasagne', description: 'Sauce tomate boeuf basilic mozzarella', price: 10 }
+    ],
+    desserts: [
+      { id: 8, name: 'Tiramisu', description: 'Mascarpone, biscuit, café, la vie quoi', price: 8 },
+      { id: 9, name: 'Panna Cotta', description: 'Dessert à base de crème et de lait avec coulis de fruits rouges', price: 8 }
+    ]
+  };
 
   return (
-    <div>
-      <h1>Sélection de Menu pour le restaurant "{restaurantName}"</h1>
-      <div>
-        <h2>Menu :</h2>
-        {menuItems.map(item => (
+    <StyledContentWrapper>
+      <StyledPageHeader>
+        <StyledButtonContainer>
+          <StyledPreviousButton onClick={() => handlePreviousButtonClick()}><StyledImage src={backArrow} /></StyledPreviousButton>
+        </StyledButtonContainer>
+        <StyledTitle>Qu'est ce qu'on mange ?</StyledTitle>
+      </StyledPageHeader>
+      <StyledDishContainer>
+        <StyledH2>Entrée</StyledH2>
+        {menuItems.entries.map(item => (
           <MenuItem
             key={item.id}
             item={item}
             addToCart={addToCart}
           />
         ))}
-      </div>
-      <div>
-      <h2>Panier :</h2>
-        <CartEntries />
-      </div>
-      <Total cart={cartEntries} total={total}/>
-    </div>
+      </StyledDishContainer>
+      <StyledDishContainer>
+        <StyledH2>Plat</StyledH2>
+        {menuItems.plats.map(item => (
+          <MenuItem
+            key={item.id}
+            item={item}
+            addToCart={addToCart}
+          />
+        ))}
+      </StyledDishContainer>
+      <StyledDishContainer>
+      <StyledH2>Dessert</StyledH2>
+      {menuItems.desserts.map(item => (
+          <MenuItem
+            key={item.id}
+            item={item}
+            addToCart={addToCart}
+          />
+        ))}
+      </StyledDishContainer>
+      <RecapPlats />
+    </StyledContentWrapper>
   );
 }
+
+const StyledContentWrapper = styled.div`
+  padding: 14px 16px;
+`;
+
+const StyledDishContainer = styled.div`
+
+`;
+
+const StyledPageHeader = styled.div`
+  display: flex;
+  align-items: center;
+  height: 36px;
+  margin-bottom: 22px;
+`;
+
+const StyledButtonContainer = styled.div`
+
+`;
+
+const StyledPreviousButton = styled.button`
+  line-height: 0;
+`;
+
+const StyledImage = styled.img`
+  height: 30px;
+`;
+
+const StyledTitle = styled.h1`
+  font-size: 2.2em;
+  font-weight: 700;
+`;
+
+const StyledH2 = styled.h2`
+  text-align: left;
+  padding: 0 0 12px 0;
+  font-size: 2.4em;
+`;
+
+const StyledCart = styled.div`
+
+`;
 
 export default MenuSelection;

@@ -28,7 +28,7 @@ const BookingCounter = ({ hasError, setGuestCountError }) => {
                 key={elem.id} 
                 onClick={() => handleGuestCountChange(elem)}
                 value={elem.count}
-                className={guestCount.count === elem.count || (guestCount.count > 7 && elem.id === 7)  ? 'selected' : ''} //permet de garder le choix de guest en surbrillance
+                className={guestCount.count === elem.count || (guestCount.count > 7 && elem.id === 7)  ? 'selected' : ''}
               >
                 {elem.label}
               </StyledSelectedCount>
@@ -76,8 +76,9 @@ const StyledSelectedCount = styled.button`
 `
 
 const StyledTitle = styled.h1`
-  font-size: 1.5em;
+  font-size: 1.6em;
   padding: 20px 0 0 20px;
+  font-weight: 400;
 `;
 
 

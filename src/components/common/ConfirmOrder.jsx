@@ -5,6 +5,7 @@ import useCart from '../../hooks/useCart';
 import useUserDataReservation from "../../hooks/useUserDataReservation";
 import { useNavigate } from 'react-router-dom';
 import useLunch from "../../hooks/useLunch";
+import Button from "./Button";
 
 const ConfirmOrder = ({ emailTemplate }) => {
   const { cartEntries, total } = useCart();
@@ -71,9 +72,17 @@ const ConfirmOrder = ({ emailTemplate }) => {
     await handleResetDataReservation();
   }
 
+  const confirmOrderDisplay = () => {
+    return (
+      <div>
+        Payer la totalité
+      </div>
+    )
+  }
+
   return (
     <StyledConfirmOrder>
-      <button onClick={handleSendMails}>Confirmer la commande</button>
+      <Button action={handleSendMails} Display={confirmOrderDisplay} />
     </StyledConfirmOrder>
   )
 };

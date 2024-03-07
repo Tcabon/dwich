@@ -26,17 +26,18 @@ const ContactUsPro = () => {
 
 const StyledContactUsPro = styled.div`
   background-color: #fff;
-  padding: 15px;
+  padding: 20px;
   border-radius: 10px;
 `;
 
 const StyledText = styled.p`
-  font-size: 1.2em;
+  font-size: 1.6em;
 `;
 
 const Styledh2 = styled.h2`
-  margin-top: 8px;
-  font-size: 3em;
+  margin: 8px 0 20px 0;
+  font-size: 2.2em;
+  font-weight: 700;
 `;
 
 export default ContactUsPro;

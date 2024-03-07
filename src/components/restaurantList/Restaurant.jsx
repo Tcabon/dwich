@@ -5,13 +5,13 @@ import useUserDataReservation from '../../hooks/useUserDataReservation';
 import Button from '../common/Button';
 
 const hours = [
-    { id: 1, hour: '11:30' },
-    { id: 2, hour: '12:00' },
-    { id: 3, hour: '12:30' },
-    { id: 4, hour: '13:00' },
-    { id: 5, hour: '13:30' },
-    { id: 6, hour: '14:00' },
-    { id: 7, hour: '14:30' },
+    { id: 1, hour: '11h30' },
+    { id: 2, hour: '12h00' },
+    { id: 3, hour: '12h30' },
+    { id: 4, hour: '13h00' },
+    { id: 5, hour: '13h30' },
+    { id: 6, hour: '14h00' },
+    { id: 7, hour: '14h30' },
 ];
 
 const ContinueDisplay = () => {
@@ -69,61 +69,50 @@ const StyledRestaurantContainer = styled.div`
   border-radius: 10px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  padding: 20px;
+  padding: 20px ;
+  margin-bottom: 15px;
 `;
 
 const StyledImageContainer = styled.div`
-  height: 120px;
-  border-radius: 10px;
+  height: 145px;
   background: url("https://www.spoon-restaurant.com/wp-content/uploads/2022/06/Spoon_cLe_Bonbon-1-scaled.jpg") center/cover no-repeat;
 `;
 
 const StyledRestaurantInfo = styled.div`
-  padding: 5px;
-  text-align: center;
+  padding: 20px 0 10px 0;
+  text-align: left;
 `;
 
 const StyledName = styled.h2`
+  padding-bottom: 5px;
   margin-bottom: 5px;
-  font-size: 1.5rem;
-  color: #333;
+  font-size: 2.2em;
+  font-weight: 700;
 `;
 
 const StyledDescription = styled.p`
-  font-size: 0.9rem;
-  color: #666;
+  font-size: 1.6em;
 `;
 
 const StyledDatepicker = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 16px;
   padding: 5px 0;
+  margin-bottom: 12px;
 `;
 
 const StyledDateButton = styled.button`
-  background-color: #DFDFDF;
-  border-radius: 8px;
-  border: none;
-  margin: 3px;
-  padding: 6px 6px;
-  font-size: 0.9rem;
+  border-radius: 4px;
+  border: solid 1px black;
+  font-size: 1.6em;
+  padding: 5px 8px;
   cursor: pointer;
-
   &.selected {
-    background-color: #F2D621;
+    border: solid 1px #e39207;
+    background-color: #e39207;
+    color: #FFF;
   }
-`;
-
-const StyledButton = styled.button`
-  background-color: #F2D621;
-  color: #FFF;
-  border: none;
-  border-radius: 10px;
-  padding: 8px 16px;
-  font-size: 1rem;
-  margin: 10px;
-  cursor: pointer;
 `;
 
 export default Restaurant;

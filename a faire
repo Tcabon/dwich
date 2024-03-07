@@ -1,34 +1,7 @@
-selection menu 
-    -Quand ajout panier ==> animation toaster
-    
-repartition order convives
-----    -retrouver les guest au moment d assigner (bug fonctionnel)
-????    -identifier le bug qui a fait sauté le guestsList 
-
-    -Quand ajout convive supérieur au nombre de convives définis ==> message d'alerte
-Total
-    reset le sessionAssignedCartEntries a null et non []
-
-    handleConfirmOrder
-        Prévoir un flag pour savoir si il y a eu un split order, et vérifier le contenu du cart, mettre la data au propre
-
-ConfirmOrder
-    Faire un bouton pour reset et retourner a l accueil
-
-app.dwich@gmail.com
-9Jpzm23AzPxP83
-
-emailjs
-Kx?7aZog*njeSyQ3WM!6Tw
-
-home
-
-Faut il revenir au calendrier ou a l'écran titre
-Nous devrions nous pas mettre l'heure du diner avec le reste des options de reservations ?
-
-{ id: 5, count: 5, label: '5'},
-  { id: 6, count: 6, label: '6'},
-  { id: 7, count: 10 ????????, label: '7 et +'}
-
+penser a empecher d ajouter plus de convives que le choix de départ
+quand on reset, une date par défault se met, mais pas au lancement de l app
 
 \\wsl$
+
+dwich.app.v2@gmail.com
+!i55)tE8sq=QX8

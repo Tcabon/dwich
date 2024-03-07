@@ -6,7 +6,7 @@ import '../../styles/calendar.css';
 import styled from 'styled-components';
 import useUserDataReservation from '../../hooks/useUserDataReservation';
 
-function CalendarGrid({ backgroundColor }) {
+function CalendarGrid({ hasError, setSelectedDateError }) {
   const {selectedDate, setSelectedDate} = useUserDataReservation();
 
   const minDate = new Date();
@@ -29,12 +29,17 @@ function CalendarGrid({ backgroundColor }) {
   }
 
   const handleDateChange = (value) => {
-    setSelectedDate(value);
+    if (!value) {
+      setSelectedDateError(true);
+    } else {
+      setSelectedDateError(false);
+      setSelectedDate(value);
+    }
   }
 
   return (
     <div>
-      <StyledCalendarContainer style={{ backgroundColor: "#fff" }}>
+      <StyledCalendarContainer $hasError={hasError}>
         <Calendar
           onChange={handleDateChange}
           value={selectedDate}
@@ -49,9 +54,11 @@ function CalendarGrid({ backgroundColor }) {
 }
 
 const StyledCalendarContainer = styled.div`
-  background-color: ${(props) => props.backgroundColor || 'transparent'};
+  background-color: #fff;
   border-radius: 10px;
-  padding-bottom: 10px;
+  
+  padding-bottom: 20px;
+  border: 2px solid ${props => props.$hasError ? "red" : "transparent"};
 
   .react-calendar {
     border: none;
@@ -94,7 +101,8 @@ const StyledCalendarContainer = styled.div`
     padding: 3px 0 3px 0;
     abbr {
       display: grid;
-      width: 80%;
+      width: 40px;
+      height: 40px;
       aspect-ratio: 1/1;
       place-content: center;
       border-color: #ccc;

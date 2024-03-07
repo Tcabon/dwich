@@ -2,12 +2,11 @@ import React, { useState } from 'react'
 import Autocomplete from "react-google-autocomplete";
 import styled from 'styled-components';
 import useUserDataReservation from '../../hooks/useUserDataReservation';
-import { useNavigate } from 'react-router-dom';
+import Button from '../common/Button';
 
 const AutoCompleteGoogle = ({ hasError, setTownError }) => {
-  const {selectedDate, guestCount, setTown} = useUserDataReservation();
+  const { setTown } = useUserDataReservation();
   const [hasPostalCodeError, setHasPostalCodeError] = useState(false);
-  const navigate = useNavigate();
 
   const getElementFromGoogleMapsObject = (apiObject, type) => {
     if (apiObject && apiObject.address_components && Array.isArray(apiObject.address_components)) {
@@ -44,6 +43,7 @@ const AutoCompleteGoogle = ({ hasError, setTownError }) => {
           }}
           onFocus={() => setTownError(false)}
           options={{ types: ['(regions)'], componentRestrictions: { country: 'fr' } }}
+          placeholder="Ville, code postal, adresse"
         />
       </StyledAutoComplete>
     </StyledAutoCompleteContainer>
@@ -51,31 +51,54 @@ const AutoCompleteGoogle = ({ hasError, setTownError }) => {
 };
 
 const StyledAutoCompleteContainer = styled.div`
-  margin: 0 15px 0 15px;
+  margin: 0 15px 20px 15px;
   border-radius: 10px;
   background-color: #fff;
   border: 2px solid ${props => props.$hasError ? "red" : "transparent"};
 `;
 
 const StyledAutoComplete = styled.div`
+  position: relative; /* Position relative pour positionner la ligne */
+  padding: 0 20px 20px 20px;
+
   .pac-target-input {
     width: 100%;
     height: 40px;
-    padding: 0 0 0 10px;
     width: calc(100% - 10px);
-    font-size: 1.2rem;
+    font-size: 1.6em;
     background-color: #FFF;
     color: #1A4133;
     border: none;
+    opacity: 0.56;
+    border-bottom: 1px solid #919EAB;
+    outline: none;
+    &:focus {
+      border-bottom: 1px solid #919EAB;
+      opacity: 1;
+    }
+    &:focus::placeholder {
+      font-size: 0.55em;
+      opacity: 0.56;
+      position: relative;
+      top: -17px;
+    }
   }
-  padding-left: 10px;
-  padding-bottom: 10px;
-`;
 
+  /* Style pour la ligne sous l'input */
+  .underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #ccc; /* Couleur de votre choix */
+  }
+`;
 const StyledTitle = styled.h1`
-  font-size: 1.5em;
+  font-size: 1.6em;
   margin: 0 0 10px 0;
-  padding: 20px 0 0 20px;
+  padding: 20px 0 20px 20px;
   text-align: left;
 `;
 

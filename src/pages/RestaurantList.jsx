@@ -1,28 +1,38 @@
 import React from 'react';
-import Restaurant from '../components/restaurantList/Restaurant';
+import Restaurant from '@/components/restaurantList/Restaurant';
+import RecapBar from '@/components/common/RecapBar';
 import styled from 'styled-components';
 import {useParams} from "react-router-dom";
-import useUserDataReservation from '../hooks/useUserDataReservation';
-import RecapBar from '../components/common/RecapBar';
+import useUserDataReservation from '@/hooks/useUserDataReservation';
+import { useNavigate } from 'react-router-dom';
+import backArrow from '@/assets/icons/backArrow.png';
 
 function RestaurantList() {
   const { postalCode } = useParams(); 
-  const {selectedDate} = useUserDataReservation();
+  const navigate = useNavigate();
+
   const restaurants = [
     { id: 1, name: 'Les patapons', description: 'Restaurant pour petits cons avec une description plus longue', postalCodes: ["75016", "92100"] },
     { id: 2, name: 'Les patapoufs', description: 'Restaurant pour grandes poufs', postalCodes: ["75015", "75007"]  },
     { id: 3, name: 'Les pataniais', description: 'Restaurant pour les niais', postalCodes: ["75116", "92200"] },
     { id: 4, name: 'Le Limmeuillois', description: 'Restaurant Portugais', postalCodes: ["24510"] },
     { id: 5, name: "Au délice d'Istanbul", description: 'Restaurant Turque', postalCodes: ["92100"]}
-    // ... Ajoutez plus de restaurants ici
   ];
 
-  // Vérifiez s'il y a des restaurants correspondant au code postal
   const filteredRestaurants = restaurants.filter(restaurant => restaurant.postalCodes.includes(postalCode));
+
+  const handlePreviousButtonClick = () => {
+    navigate(-1);
+  };
 
   return (
     <StyledRestaurantsListPage>
-      <StyledTitle>Choisissez votre restaurant</StyledTitle>
+      <StyledPageHeader>
+        <StyledButtonContainer>
+          <StyledPreviousButton onClick={() => handlePreviousButtonClick()}><StyledImage src={backArrow} /></StyledPreviousButton>
+        </StyledButtonContainer>
+        <StyledTitle>Choisissez votre restaurant</StyledTitle>
+      </StyledPageHeader>
       <StyledTitleLower>Puis sélectionnez une heure</StyledTitleLower>
       {filteredRestaurants.length > 0 ? (
         <StyledRestaurantsListContainer>
@@ -47,16 +57,32 @@ function RestaurantList() {
 }
 
 const StyledRestaurantsListPage = styled.div`
-  background-color: #fff62b
+  padding: 14px 16px;
+`;
+
+const StyledPageHeader = styled.div`
+  display: flex;
+  align-items: center;
+  height: 36px;
+`;
+
+const StyledButtonContainer = styled.div`
+
+`;
+
+const StyledPreviousButton = styled.button`
+  line-height: 0;
+`;
+
+const StyledImage = styled.img`
+  height: 30px;
 `;
 
 const StyledRestaurantsListContainer = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    padding: 0 20px;
-    
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 `;
 
 const StyledNoResultsMessage = styled.p`
@@ -65,14 +91,13 @@ const StyledNoResultsMessage = styled.p`
 `;
 
 const StyledTitle = styled.h1`
-  font-size: 2em;
-  font-weight: bold;
-  margin: 10px 0 15px 0;
+  font-size: 2.2em;
+  font-weight: 700;
 `;
 
 const StyledTitleLower = styled.h1`
-  font-size: 1.5em;
-  margin: 10px 0 15px 15px;
+  font-size: 1.6em;
+  margin: 5px 0 15px 0;
   text-align: left;
 `;
 

@@ -5,12 +5,10 @@ import useLunch from "../../hooks/useLunch";
 const AssignMealsToGuestsForm = (props) => {
   const { 
     assignedCartEntries,
-    setAssignedCartEntries,
     selectedCartEntryIds,
     setIsModalOpen,
     setSelectedCartEntryIds,
   } = props;
-  console.log(props);
   const [selectedOption, setSelectedOption] = useState();
   const {guestsList, setGuestsList} = useLunch();
 
@@ -37,7 +35,6 @@ const AssignMealsToGuestsForm = (props) => {
 
   const handleAddCartEntriesToUser = () => {
     setGuestsList(() => updateAssignedValue());
-    setAssignedCartEntries(() => findObjectsWithoutMatchingIds());
     setSelectedCartEntryIds(() => []);
     setIsModalOpen(() => false);
   };
