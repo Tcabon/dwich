@@ -17,7 +17,7 @@ const StyledWrapperButton = styled.button`
   padding: 20px 0;
   background: linear-gradient(to right, #e39207, #9ACD32);
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   color: white;
   text-align: center;
   align-items: center;

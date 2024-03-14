@@ -5,8 +5,10 @@ const CartEntry = ({ entry }) => {
   const singleItemTotal = entry.quantity * entry.price;
   return (
     <StyledLi>
-      <StyledSingleItem>{entry.quantity}x {entry.name} {entry.price} €</StyledSingleItem>
-      <StyledSingleItemTotal>{singleItemTotal}€</StyledSingleItemTotal>
+        <StyledSingleItemQuantity>{entry.quantity}x</StyledSingleItemQuantity>
+        <StyledSingleItemName>{entry.name}</StyledSingleItemName> 
+        <StyledSingleItemPrice>{entry.price} €</StyledSingleItemPrice>
+        <StyledSingleItemTotal>{singleItemTotal}€</StyledSingleItemTotal>
     </StyledLi> 
   );
 }
@@ -14,19 +16,28 @@ const CartEntry = ({ entry }) => {
 const StyledLi = styled.li`
   display: flex;
   justify-content: space-between;
-  mrgin: 0 0 0 5px;
+  display: flex;
+  width: 100%;
+  height: 32px;
+  font-size: 1.6em;
+  align-items: center;
+`;
+
+const StyledSingleItemQuantity = styled.p`
+  margin-right: 8px;
+`;
+
+const StyledSingleItemName = styled.p`
+  margin-right: 8px;
+`;
+
+const StyledSingleItemPrice = styled.p`
+
 `;
 
 const StyledSingleItemTotal = styled.p`
-  font-weight: 600;
-  font-size: 1em;
-  margin-left: auto; /* Aligner cet élément à droite de l'élément parent */
-  margin-bottom: 10px;
-`;
-
-const StyledSingleItem = styled.p`
-  font-size: 0.8em;
-  margin: 0 0 0 5px;
+  font-weight: 700;
+  margin-left: auto;
 `;
 
 export default CartEntry;

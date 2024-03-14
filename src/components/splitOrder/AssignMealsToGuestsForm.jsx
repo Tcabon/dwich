@@ -18,12 +18,6 @@ const AssignMealsToGuestsForm = (props) => {
     );
   };
 
-  const findObjectsWithoutMatchingIds = () => {
-    return assignedCartEntries.filter((obj1) =>
-      !selectedCartEntryIds.includes(obj1.cartEntryId)
-    );
-  };
-
   const updateAssignedValue = () => {
     return guestsList.map((object) => {
       if (object.userId === selectedOption) {

@@ -1,6 +1,7 @@
 import React, { createContext, useMemo} from "react";
 import CartEntry from "../components/menuSelection/CartEntry";
 import useStateStorage from "../hooks/useStateStorage";
+import styled from "styled-components";
 
 export const CartContext = createContext();
 
@@ -63,11 +64,11 @@ const CartContextProvider = ({ children }) => {
 
   const CartEntries = () => {
     return (
-      <ul>
+      <StyledUl>
         {readableCartEntries?.map(cartEntry => (
             <CartEntry key={cartEntry.id} entry={cartEntry} />
           ))}
-      </ul>
+      </StyledUl>
     )
   }
 
@@ -88,5 +89,9 @@ const CartContextProvider = ({ children }) => {
     </CartContext.Provider>
   )
 };
+
+const StyledUl = styled.ul`
+  margin-bottom: 16px;
+`;
 
 export default CartContextProvider;

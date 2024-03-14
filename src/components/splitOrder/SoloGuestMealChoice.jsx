@@ -1,13 +1,18 @@
 import react, { useEffect, useState } from "react";
 import styled from "styled-components";
 import useLunch from "../../hooks/useLunch";
+import chevronUpIcon from '@/assets/icons/chevronUpIcon.png';
+import crossIcon from '@/assets/icons/crossIcon.png';
 
 
 const SoloGuestMealChoice = ({guest, assignedCartEntries}) => {
   const [expanded, setExpanded] = useState(false);
-  const { guestsList, setGuestsList } = useLunch();
+  const [clicked, setClicked] = useState(false);
+  const { guestsList, setGuestsList, selectGuestInSplitOrder } = useLunch();
   const totalPanierSolo = guest.assignedCartEntries.reduce((total, entry) => total + entry.price, 0);
-
+  
+  console.log(guest);
+  
   const transformCartEntries = () => {
     return (guest.assignedCartEntries.reduce((acc, entry) => {
       const existingEntryIndex = acc.findIndex(item => item.name === entry.name);
@@ -51,13 +56,19 @@ const SoloGuestMealChoice = ({guest, assignedCartEntries}) => {
     setGuestsList(() => removeCartEntryFromGuest(userId, entry.entries[0].cartEntryId));
   };
 
+  const handleClick = () => {
+    selectGuestInSplitOrder(guest.userId)
+  }
+
   return (
-    <StyledContentWrapper >
-      <StyledTopContent>
+    <StyledContentWrapper>
+      <StyledTopContent onClick={handleClick} $clicked={guest.isSelected}>
         <StyledName>{guest.name}</StyledName>
         <StyledTotalPanierSolo>{totalPanierSolo} €</StyledTotalPanierSolo>
         {transformedCartEntries.length > 0 && (
-          <StyledToggleArrow onClick={() => setExpanded(!expanded)} $expanded={expanded}>&#8679;</StyledToggleArrow>
+          <StyledButtonContainer>
+            <StyledPreviousButton onClick={() => setExpanded(!expanded)}><StyledChevronIcon src={chevronUpIcon} $expanded={expanded}/></StyledPreviousButton>
+          </StyledButtonContainer>
         )}
       </StyledTopContent>
       {expanded && (
@@ -68,7 +79,7 @@ const SoloGuestMealChoice = ({guest, assignedCartEntries}) => {
               <StyledItemName>{entry.name}</StyledItemName>
               <StyledItemPrice>{entry.price} €</StyledItemPrice>
               <StyledEntryTotal>{entry.total} €</StyledEntryTotal>
-              <StyledButton onClick={() => handleRemoveCartEntryFromGuest(entry, guest.userId)}>O</StyledButton>
+              <StyledButton onClick={() => handleRemoveCartEntryFromGuest(entry, guest.userId)}><StyledCrossIcon src={crossIcon}/></StyledButton>
             </StyledEntry>
           ))}
         </StyledInfos>
@@ -78,58 +89,69 @@ const SoloGuestMealChoice = ({guest, assignedCartEntries}) => {
 };
 
 const StyledContentWrapper = styled.div`
+  min-height: 64px;
+  width: 100%;
   background-color: #fff;
-  margin: 0 20px 10px; 20px;
-  border-radius: 5px;
+  margin: 0 0 16px 0;
+  border-radius: 8px;
+  align-items: center;
+  
 `;
 
 const StyledTopContent = styled.div`
   display: flex;
+  height: 32px;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 16px;
+  border: ${props => props.$clicked ? 'solid 1.5px orange' : 'none'};
+  border-radius: 8px;
 `;
 
 const StyledName = styled.p`
-  padding: 0 0 0 20px;
-  font-size: 1.4em;
+  font-size: 1.6em;
+  
 `;
 
 const StyledTotalPanierSolo = styled.p`
   margin-left: auto;
-  padding: 0 10px 0 0;
   font-weight: 600;
   font-size: 1.6em;
 `;
 
-const StyledToggleArrow = styled.span`
-  cursor: pointer;
-  font-size: 1.5rem;
-  transition: transform 0.3s;
+const StyledButtonContainer = styled.div`
+  width: 24px;
+  height: 24px;
+`;
+
+const StyledPreviousButton = styled.button`
+  line-height: 0;
+`;
+
+const StyledChevronIcon = styled.img`
+  height: 24px;
   transform: ${props => props.$expanded ? 'rotate(0)' : 'rotate(180deg)'};
-  color: black;
-  padding: 0 10px 0 0;
 `;
 
 const StyledInfos = styled.div`
   background-color: #F2F2F2;
+  padding: 16px 16px 8px 16px;
 `;
 
 const StyledEntry = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 20px 0 20px;
-  padding: 5px 0;
-  font-size: 1.3em;
+  font-size: 1.6em;
+  margin-bottom: 8px;
 `;
 
 const StyledQuantity = styled.p`
-
+  padding-right: 8px;
 `;
 
 const StyledItemName = styled.p`
-  padding: 0 5px;
+  padding-right: 8px;
 `;
 
 const StyledItemPrice = styled.p`
@@ -143,9 +165,16 @@ const StyledEntryTotal = styled.p`
 `;
 
 const StyledButton = styled.button`
-  border: none;
-  background: transparent;
-  font-size: 1.2em;
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyledCrossIcon = styled.img`
+  width: 13.5px;
+  height: 13.5px;
 `;
 
 export default SoloGuestMealChoice;

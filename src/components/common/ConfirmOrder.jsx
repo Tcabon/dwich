@@ -69,7 +69,7 @@ const ConfirmOrder = ({ emailTemplate }) => {
   const handleSendMails = async () => {
     await handleServiceConfirmOrder();
     await handleUserConfirmOrder();
-    await handleResetDataReservation();
+    //await handleResetDataReservation();
   }
 
   const confirmOrderDisplay = () => {
@@ -88,7 +88,7 @@ const ConfirmOrder = ({ emailTemplate }) => {
 };
 
 const StyledConfirmOrder = styled.div`
-
+  margin-top: 20px;
 `
 
 export default ConfirmOrder;

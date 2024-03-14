@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import crossIcon from '@/assets/icons/crossIcon.png';
 
 const ModalToaster = (props) => {
   const {title, content: ContentComponent, isModalOpen, setIsModalOpen, ...restProps} = props;
@@ -11,7 +12,7 @@ const ModalToaster = (props) => {
         <StyledModalToaster>
           <StyledModalToasterHeader>
             <StyledHeaderTitle>{title}</StyledHeaderTitle>
-            <StyledCloseButton onClick={() => setIsModalOpen(false)}>X</StyledCloseButton>
+            <StyledCloseButton onClick={() => setIsModalOpen(false)}><StyledImage src={crossIcon} /></StyledCloseButton>
           </StyledModalToasterHeader>
           <ContentComponent {...restProps} setIsModalOpen={setIsModalOpen}/>
         </StyledModalToaster>
@@ -34,7 +35,7 @@ const StyledModalToaster = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: calc(100% - 80px);
-  padding: 20px;
+  padding: 24px 16px 24px 16px;
   background-color: #fff;
   border-radius: 10px;
   z-index: 200;
@@ -44,12 +45,12 @@ const StyledModalToasterHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 48px;
 `;
 
 const StyledHeaderTitle = styled.p`
-  font-size: 1.5em;
-  font-weight: 600;
+  font-size: 2em;
+  font-weight: 700;
 `;
 
 const StyledCloseButton = styled.div`
@@ -58,7 +59,11 @@ const StyledCloseButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5em;
+`;
+
+const StyledImage = styled.img`
+  width: 20px;
+  height: 20px;
 `;
 
 export default ModalToaster;

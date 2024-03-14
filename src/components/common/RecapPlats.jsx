@@ -34,19 +34,18 @@ const StyledRecapBar = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  width: calc(100% - 32px);
   height: ${props => props.$expanded ? 'auto' : '50px'};
+  min-height: 56px;
   overflow: hidden;
   background-color: #FFF;
   border-radius: 10px 10px 0 0;
   padding: 0 16px;
   box-shadow: 0px 5px 25px 10px rgba( 0, 0, 0, 0.1);
   position: fixed;
-  bottom: 0; /* Décalage vers le haut */
+  bottom: 0;
   left: 0;
-  width: calc(100% - 32px);
   z-index: 100;
-  color: black;
-  background-color: #FFF;
   transition: max-height 0.2s cubic-bezier(0.17, 0.67, 0.76, 0.71);
 `;
 
@@ -55,13 +54,16 @@ const StyledRecapHead = styled.div`
   height: 40px;
   align-items: center;
   justify-content: space-between;
-  margin: 8px 0;
+  padding: 8px 0;
 `;
 
 const StyledToggleArrow = styled.div`
-cursor: pointer;
-transition: transform 0.3s;
-transform: ${props => props.$expanded ? 'rotate(270deg)' : 'rotate(90deg)'};
+  cursor: pointer;
+  transition: transform 0.3s;
+  transform: ${props => props.$expanded ? 'rotate(270deg)' : 'rotate(90deg)'};
+  position: absolute;
+  top: 5px;
+  right: 4px;
 `;
 
 const StyledArrowIcon = styled.img`
@@ -75,7 +77,7 @@ const StyledRecapTitle = styled.h2`
 `;
 
 const StyledInfos = styled.div`
-  
+  padding: 24px 8px;
 `;
 
 export default RecapPlats;

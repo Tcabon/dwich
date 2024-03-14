@@ -17,7 +17,6 @@ const GuestMealChoice = ({assignedCartEntries}) => {
 
 const StyledContentWrapper = styled.div`
   width: 100%;
-
 `;
 
 const StyledSoloGuest = styled.div`

@@ -28,13 +28,15 @@ function Total({ cart, total }) {
   return (
     <StyledTotalWrapper>
       <StyledTotalCommand>
-        <StyledTotalText>Total :</StyledTotalText>
+        <StyledTotalText>TOTAL</StyledTotalText>
         <StyledTotalAmount>{total}€</StyledTotalAmount>
       </StyledTotalCommand>
-      {guestCount.count > 1 && (
-        <Button action={handleSplitOrder} Display={splitOrderDisplay}/>
-      )}
-      <ConfirmOrder emailTemplate='s_order_conf' />
+      <StyledButtonsWrapper>
+        {guestCount.count > 1 && (
+          <Button action={handleSplitOrder} Display={splitOrderDisplay}/>
+        )}
+        <ConfirmOrder emailTemplate='s_order_conf' />
+      </StyledButtonsWrapper>
     </StyledTotalWrapper>
   );
 }
@@ -45,17 +47,23 @@ const StyledTotalWrapper = styled.div`
 
 const StyledTotalCommand = styled.div`
   display: flex;
-  margin-top: 10px;
-  font-weight: 600;
+  height: 32px;
+  margin-bottom: 20px;
+  align-items: center;
 `;
 
 const StyledTotalText = styled.p`
-  font-size: 1.2em;
+  font-size: 1.6em;
 `;
 
 const StyledTotalAmount = styled.p`
   margin-left: auto;
-  font-size: 1.5em;
+  font-size: 2em;
+  font-weight: 600;
+`;
+
+const StyledButtonsWrapper = styled.div`
+
 `;
 
 export default Total;
