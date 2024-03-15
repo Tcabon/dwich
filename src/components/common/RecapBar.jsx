@@ -3,7 +3,7 @@ import styled from "styled-components";
 import useUserDataReservation from '../../hooks/useUserDataReservation';
 import { useNavigate } from 'react-router-dom';
 import { format } from "date-fns";
-import fr from 'date-fns/locale/fr';
+import { fr } from 'date-fns/locale';
 import Button from "./Button";
 import backArrow from '@/assets/icons/backArrow.png';
 
@@ -25,7 +25,7 @@ const RecapBar = () => {
   const resetDisplay = () => {
     return (
       <div>
-        Reset 
+        Revenir à l'accueil
       </div>
     )
   }
@@ -37,7 +37,7 @@ const RecapBar = () => {
         <StyledToggleArrow $expanded={expanded}><StyledArrowIcon src={backArrow} /></StyledToggleArrow>
       </StyledRecapHeader>
           <StyledInfos>
-            <StyledSingleInfo><StyledPrefix>Pour le</StyledPrefix> {(selectedDate !== null) ? <StyledSelectedChoice>{format(selectedDate, 'dd MMMMMMMMM yyyy')}</StyledSelectedChoice> : "pas de date"}</StyledSingleInfo>
+            <StyledSingleInfo><StyledPrefix>Pour le</StyledPrefix> {(selectedDate !== null) ? <StyledSelectedChoice>{format(selectedDate, 'dd MMMMMMMMM yyyy', {locale:fr})}</StyledSelectedChoice> : "pas de date"}</StyledSingleInfo>
             <StyledSingleInfo><StyledPrefix>Avec</StyledPrefix> {guestCount ? <StyledSelectedChoice>{guestCount.label} personnes</StyledSelectedChoice> : <StyledPlaceholder>2 personnes</StyledPlaceholder>}</StyledSingleInfo>
             <StyledSingleInfo><StyledPrefix>À</StyledPrefix> {town ? <StyledSelectedChoice>{town}</StyledSelectedChoice> : <StyledPlaceholder>Ville, code postal, adresse</StyledPlaceholder>}</StyledSingleInfo>
             <Button action={handleResetClick} Display={resetDisplay} />

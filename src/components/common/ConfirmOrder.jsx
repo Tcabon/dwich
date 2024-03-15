@@ -88,7 +88,8 @@ const ConfirmOrder = ({ emailTemplate }) => {
 };
 
 const StyledConfirmOrder = styled.div`
-  margin-top: 20px;
+  margin-top: 16px;
+  padding-bottom: 50px;
 `
 
 export default ConfirmOrder;

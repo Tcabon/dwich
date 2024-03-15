@@ -38,6 +38,7 @@ const HostUserForm = () => {
     }
     data.userId = generateUniqueId();
     data.isHost = true;
+    data.isSelected = true;
     data.isDeletable = false;
     data.assignedCartEntries = [];
     setGuestsList([...guestsList, data]);

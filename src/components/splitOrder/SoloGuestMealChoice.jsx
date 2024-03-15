@@ -7,11 +7,8 @@ import crossIcon from '@/assets/icons/crossIcon.png';
 
 const SoloGuestMealChoice = ({guest, assignedCartEntries}) => {
   const [expanded, setExpanded] = useState(false);
-  const [clicked, setClicked] = useState(false);
   const { guestsList, setGuestsList, selectGuestInSplitOrder } = useLunch();
   const totalPanierSolo = guest.assignedCartEntries.reduce((total, entry) => total + entry.price, 0);
-  
-  console.log(guest);
   
   const transformCartEntries = () => {
     return (guest.assignedCartEntries.reduce((acc, entry) => {
@@ -58,12 +55,14 @@ const SoloGuestMealChoice = ({guest, assignedCartEntries}) => {
 
   const handleClick = () => {
     selectGuestInSplitOrder(guest.userId)
-  }
+  }; 
+
+  console.log(transformedCartEntries);
 
   return (
     <StyledContentWrapper>
       <StyledTopContent onClick={handleClick} $clicked={guest.isSelected}>
-        <StyledName>{guest.name}</StyledName>
+        {guest.isDeletable ? <StyledName>{guest.name}</StyledName> : <StyledName>{guest.firstName}</StyledName>}
         <StyledTotalPanierSolo>{totalPanierSolo} €</StyledTotalPanierSolo>
         {transformedCartEntries.length > 0 && (
           <StyledButtonContainer>
@@ -71,7 +70,7 @@ const SoloGuestMealChoice = ({guest, assignedCartEntries}) => {
           </StyledButtonContainer>
         )}
       </StyledTopContent>
-      {expanded && (
+      {expanded && transformedCartEntries.length > 0 && (
         <StyledInfos>
           {transformedCartEntries.map((entry, index) => (
             <StyledEntry key={index}>
@@ -104,13 +103,16 @@ const StyledTopContent = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 16px;
-  border: ${props => props.$clicked ? 'solid 1.5px orange' : 'none'};
+  border: ${props => props.$clicked ? 'solid 1px orange' : 'solid 1px transparent'};
   border-radius: 8px;
+  transform: ${props => props.$clicked ? 'scale(1.05)' : 'scale(1)'};
+  box-shadow: ${props => props.$clicked ? '0 5px 25px rgba(0, 0, 0, 0.3)' : 'none'};
+  transition: all 0.2s cubic-bezier(0.17, 0.67, 0.76, 0.71);
+  background-color: #fff;
 `;
 
 const StyledName = styled.p`
   font-size: 1.6em;
-  
 `;
 
 const StyledTotalPanierSolo = styled.p`
@@ -136,6 +138,7 @@ const StyledChevronIcon = styled.img`
 const StyledInfos = styled.div`
   background-color: #F2F2F2;
   padding: 16px 16px 8px 16px;
+  border-radius: 0 0 8px 8px;
 `;
 
 const StyledEntry = styled.div`
@@ -144,6 +147,7 @@ const StyledEntry = styled.div`
   align-items: center;
   font-size: 1.6em;
   margin-bottom: 8px;
+  white-space: nowrap;
 `;
 
 const StyledQuantity = styled.p`
@@ -151,7 +155,11 @@ const StyledQuantity = styled.p`
 `;
 
 const StyledItemName = styled.p`
+  width: 140px;
+  text-overflow: ellipsis;
+  overflow: hidden;
   padding-right: 8px;
+  text-align: left;
 `;
 
 const StyledItemPrice = styled.p`

@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const Button = ({type, action, Display }) => {
-
+const Button = ({type, action, Display, status }) => {
+  console.log(status);
   return (
-    <StyledWrapperButton type={type} onClick={action}>
+    <StyledWrapperButton type={type} onClick={action} $status={status} >
       <Display />
     </StyledWrapperButton>
   )
@@ -15,10 +15,10 @@ const StyledWrapperButton = styled.button`
   width: 100%;
   height: 54px;
   padding: 20px 0;
-  background: linear-gradient(to right, #e39207, #9ACD32);
+  background: ${props => props.$status === 'disabled' ? 'linear-gradient(to right, #D5D5D5, #EEE)' : 'linear-gradient(to right, #e39207, #9ACD32)'};
   border: none;
   border-radius: 8px;
-  color: white;
+  color: ${props => props.$status === 'disabled' ? '#4a535c' : '#FFF'};
   text-align: center;
   align-items: center;
   justify-content: center;

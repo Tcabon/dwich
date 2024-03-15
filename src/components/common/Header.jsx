@@ -19,7 +19,7 @@ const Header = () => {
 
 const StyledHeader = styled.header`
   display: flex;
-  width: calc(100% - 30px);
+  width: calc(100% - 32px);
   padding: 8px 16px 16px 16px;;
   z-index: 1000;
   height: 36px;

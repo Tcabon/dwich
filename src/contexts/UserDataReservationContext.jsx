@@ -14,7 +14,7 @@ const UserDataReservationContextProvider = ({ children }) => {
   const [dinnerHour, setDinnerHour] = useStateStorage('sessionDinnerHour');
   const [restaurantName, setRestaurantName] = useStateStorage('sessionRestaurantName');
   const { setGuestsList } = useLunch();
-  const {setCartEntries} = useCart();
+  const {setCartEntries, setItemsCounter} = useCart();
 
   const handleResetDataReservation = () => {
     setGuestsList([]);
@@ -24,6 +24,7 @@ const UserDataReservationContextProvider = ({ children }) => {
     setDinnerHour(null);
     setRestaurantName(null);
     setCartEntries([]);
+    setItemsCounter([]);
   };
 
   return (

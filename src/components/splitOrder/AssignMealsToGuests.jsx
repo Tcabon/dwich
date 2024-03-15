@@ -1,12 +1,14 @@
 import React, {useState} from "react";
 import styled from "styled-components";
-import ModalToaster from "../common/ModalToaster";
-import AssignMealsToGuestsForm from "./AssignMealsToGuestsForm";
-import Button from "../common/Button";
+import Button from "@/components/common/Button";
+import useLunch from "@/hooks/useLunch";
+import SnackBar from "@/components/common/SnackBar";
+
 
 const AssignMealsToGuests = ({assignedCartEntries}) => {
   const [selectedCartEntryIds, setSelectedCartEntryIds] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const {assignMealsToGuest} = useLunch();
+  const [noMealsSelected, setNoMealsSelected] = useState(null);
 
   const assignMealDisplay = () => {
     return (
@@ -14,7 +16,18 @@ const AssignMealsToGuests = ({assignedCartEntries}) => {
         Attribuer 
       </div>
     )
-  }
+  };
+
+  const handleAssignMealsToGuest = () => {
+    if (selectedCartEntryIds.length > 0) {
+      assignMealsToGuest(findObjectsWithMatchingIds());
+    } else {
+      setNoMealsSelected(true);
+      setTimeout(() => {
+        setNoMealsSelected(false);
+      }, 1500);
+    }
+  };
 
   const handleCheckboxChange = (entryId) => {
     if (selectedCartEntryIds.includes(entryId)) {
@@ -24,6 +37,12 @@ const AssignMealsToGuests = ({assignedCartEntries}) => {
     } else {
       setSelectedCartEntryIds((prevSelected) => [...prevSelected, entryId]);
     }
+  };
+
+  const findObjectsWithMatchingIds = () => {
+    return assignedCartEntries.filter((obj1) =>
+      selectedCartEntryIds.includes(obj1.cartEntryId)
+    );
   };
 
   const sortedData = assignedCartEntries.sort((a, b) => {
@@ -41,7 +60,9 @@ const AssignMealsToGuests = ({assignedCartEntries}) => {
 
   return (
     <StyledContentWrapper>
-      <StyledAssignMealTitle>Attribuez les plats</StyledAssignMealTitle>
+      {assignedCartEntries && assignedCartEntries != 0 && (
+        <StyledAssignMealTitle>Attribuez les plats</StyledAssignMealTitle>
+      )}
       {sortedData.map((entry, index) => (
         <StyledMealEntry key={index} $last={index === sortedData.length - 1}>
           <StyledInput
@@ -57,18 +78,12 @@ const AssignMealsToGuests = ({assignedCartEntries}) => {
     )}
     {assignedCartEntries && assignedCartEntries != 0 && (
       <StyledButtonContainer>
-        <Button action={() => {}} disabled={true} Display={assignMealDisplay} />
+        <Button action={() => {handleAssignMealsToGuest()}} Display={assignMealDisplay} status={selectedCartEntryIds.length > 0 ? '' : 'disabled'}/>
       </StyledButtonContainer>
     )}
-    <ModalToaster
-      title='Assigner plats'
-      content={AssignMealsToGuestsForm}
-      isModalOpen={isModalOpen}
-      setIsModalOpen={setIsModalOpen}
-      assignedCartEntries={assignedCartEntries}
-      selectedCartEntryIds={selectedCartEntryIds}
-      setSelectedCartEntryIds={setSelectedCartEntryIds}
-    />
+    {noMealsSelected && 
+      <SnackBar message={'Vous n\'avez pas choisis de plats'} />
+    }
     </StyledContentWrapper>
   )
 };

@@ -45,7 +45,7 @@ const StyledModalToasterHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 `;
 
 const StyledHeaderTitle = styled.p`

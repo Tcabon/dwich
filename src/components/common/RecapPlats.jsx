@@ -77,7 +77,7 @@ const StyledRecapTitle = styled.h2`
 `;
 
 const StyledInfos = styled.div`
-  padding: 24px 8px;
+  padding: 24px 8px 38px 8px;
 `;
 
 export default RecapPlats;

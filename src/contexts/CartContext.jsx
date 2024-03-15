@@ -19,7 +19,6 @@ const CartContextProvider = ({ children }) => {
 
   const filterItemsCounterByItemId = (itemId) => {
     const itemFound = itemsCounter.find(item => item.itemId === itemId);
-    console.log(itemFound);
     return itemFound ? itemFound.counter : 0;
   };
 

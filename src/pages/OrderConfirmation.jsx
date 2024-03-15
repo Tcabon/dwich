@@ -1,31 +1,41 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useUserDataReservation from "@/hooks/useUserDataReservation";
 import styled from 'styled-components';
 import confirmOrderImage from '@/assets/images/confirmOrderImage.png';
 import thumbsCircleImage from '@/assets/images/thumbsCircleImage.png';
+import Button from '@/components/common/Button';
 
 function OrderConfirmation() {
   const navigate = useNavigate();
   const { dinnerHour, handleResetDataReservation } = useUserDataReservation();
 
   const handleClick = () => {
+    console.log('salut');
     handleResetDataReservation();
     navigate('/');
+  };
+
+  const returnHomeDisplay = () => {
+    return (
+      <div>
+        Retourner à l'accueil
+      </div>
+    )
   }
 
   return (
-    <StyledOrderConfirmation className="order-confirmation">
+
+    <StyledOrderConfirmation>
       <StyledImageContainer><StyledImage src={confirmOrderImage}/></StyledImageContainer>
       <StyledCommandConfirmationText>Confirmation de commande #1234</StyledCommandConfirmationText>
       <StyledEmailSendText>Vous receverez dans quelques minutes un e-mail de confirmation du restaurant. </StyledEmailSendText>
       <StyledRecapPart>
         <StyledRecapHour>Payer avant {dinnerHour}</StyledRecapHour>
-        <StyledRecapText>Chaque convive va recevoir sur son adresse e-mail un lien de paiement qui  generera un QR code à montrer au restaurateur</StyledRecapText>
+        <StyledRecapText>Chaque convive va recevoir sur son adresse e-mail un lien de paiement qui générera un QR code à montrer au restaurateur</StyledRecapText>
       </StyledRecapPart>
-      <StyledButton onClick={() => handleClick()} >
-        Retour à la page d'accueil
-      </StyledButton>
+      <StyledReminderText>IMPORTANT. Tout manquement au paiement de l’intégralité des invités entrainera l’annulation de la reservation et le remboursement des paiements</StyledReminderText>
+      <Button action={handleClick} Display={returnHomeDisplay} />
     </StyledOrderConfirmation>
   );
 }
@@ -33,6 +43,7 @@ function OrderConfirmation() {
 const StyledOrderConfirmation = styled.div `
   align-item: center;
   margin: 0 16px;
+  padding-bottom: 16px;
 `;
 
 const StyledImageContainer = styled.div`
@@ -60,6 +71,7 @@ const StyledCommandConfirmationText = styled.p`
 const StyledEmailSendText = styled.p`
   height: 48px;
   line-height: 24px;
+  margin-bottom: 24px;
   font-size: 1.6em;
 `;
 
@@ -67,6 +79,7 @@ const StyledRecapPart = styled.div`
   background-color: #FFF;
   border-radius: 8px;
   padding: 16px;
+  margin-bottom: 24px;
 `;
 
 const StyledRecapHourPart = styled.div`
@@ -91,8 +104,12 @@ const StyledRecapText = styled.p`
   text-align: left;
 `;
 
-const StyledButton = styled.button`
-
+const StyledReminderText = styled.p`
+  height: 60px;
+  line-height: 20px;
+  margin-bottom: 46px;
+  font-size: 1.2em;
+  text-align: left;
 `;
 
 export default OrderConfirmation;

@@ -56,7 +56,6 @@ function CalendarGrid({ hasError, setSelectedDateError }) {
 const StyledCalendarContainer = styled.div`
   background-color: #fff;
   border-radius: 10px;
-  
   padding-bottom: 20px;
   border: 2px solid ${props => props.$hasError ? "red" : "transparent"};
 
@@ -67,6 +66,8 @@ const StyledCalendarContainer = styled.div`
   }
   
   .react-calendar__navigation {
+    height: 40px;
+    margin-bottom: 20px;
     .react-calendar__navigation button:disabled {
       background: none;
     }
@@ -78,14 +79,13 @@ const StyledCalendarContainer = styled.div`
 
   .react-calendar__navigation button {
     font-size: 1.5rem;
-    color: black; /* Couleur noire */
   }
 
   .react-calendar__month-view__weekdays__weekday {
     abbr[title] {
       text-decoration: none;
-      color: #000;
-      font-size: 1.5em;
+      color: #575757;
+      font-size: 1.2em;
     }
   }
   button {
@@ -143,8 +143,7 @@ const StyledCalendarContainer = styled.div`
   }
   
   .react-calendar__navigation__label__labelText {
-    font-size: 1.1rem;
-    font-weight: bold;
+    font-size: 16px;
     text-transform: uppercase;
     
   }

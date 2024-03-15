@@ -29,6 +29,7 @@ const AddGuestsToOrder = () => {
   };
 
   const handleAddGuest = (data) => {
+    console.log(maximumGuestsError);
     console.log(guestsList.length);
     console.log(guestCount.count);
     if (guestsList.length === guestCount.count) {
@@ -103,13 +104,14 @@ const StyledExistingGuestList = styled.div`
 const StyledExistingGuest = styled.div`
   height: 32px;
   border: solid 1px black;
-  margin-right: 16px;
+  margin: 16px 16px 0 0;
   display: flex;
   align-items: center;
   background-color: ${props => props.$isDeletable ? "transparent" : "#e39207"}; /* Condition pour le fond orange */
   color: ${props => props.$isDeletable ? "black" : "white"};
-  border: ${props => props.$isDeletable ? "solid 1px black" : "none"};
+  border: ${props => props.$isDeletable ? "solid 1px black" : "solid 1px #e39207"};
   border-radius: 5px;
+  
 `;
 
 const StyledGuestName = styled.p`
@@ -142,13 +144,22 @@ const StyledInput = styled.input`
   margin: 10px 0;
   border: none;
   border-radius: 5px;
+  padding-left: 8px;
 `;
 
 const StyledMaximumGuestsError = styled.div`
-  border: solid 1px red;
-  border-radius: 8px;
+  display: flex;
+  width: calc(100% - 24px);
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  background-color: #CF233A;
+  border: solid 1px #871424;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+  color: #FFF;
   font-size: 1.6em;
-  margin-bottom: 10px;
+  padding: 10px;
+  margin-bottom: 16px;
 `;
 
 export default AddGuestsToOrder;
