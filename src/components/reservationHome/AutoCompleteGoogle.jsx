@@ -36,7 +36,7 @@ const AutoCompleteGoogle = ({ hasError, setTownError }) => {
       )}
       <StyledAutoComplete>
         <Autocomplete
-          key={'AIzaSyCU1i2YgiFz-3C6-cGIRrjooySbbLsIQ_k'}
+          apiKey={'AIzaSyBY8reL43GRYbD0Qr8qffMc7mDX2Uuw7CM'}
           onPlaceSelected={(place) => {
             handlePlaceSelect(place);
           }}
