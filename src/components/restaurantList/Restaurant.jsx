@@ -59,7 +59,11 @@ const Restaurant = ({ id, name, description }) => {
           </StyledDateButton>
         ))}
       </StyledDatepicker>
-      <Button action={handleReservation} Display={ContinueDisplay} />
+        {
+            selectedHour !== null && (
+                <Button action={handleReservation} Display={ContinueDisplay} />
+            )
+        }
     </StyledRestaurantContainer>
   );
 }
