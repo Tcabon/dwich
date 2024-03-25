@@ -9,7 +9,7 @@ import Button from "./Button";
 
 const ConfirmOrder = ({ emailTemplate }) => {
   const { cartEntries, total } = useCart();
-  const { 
+  const {
     selectedDate,
     guestCount,
     town,
@@ -17,7 +17,7 @@ const ConfirmOrder = ({ emailTemplate }) => {
     restaurantName,
     handleResetDataReservation,
   } = useUserDataReservation();
-  
+
   const { guestsList } = useLunch();
   const totalAmount = total;
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const ConfirmOrder = ({ emailTemplate }) => {
     };
 
     try {
-      //await emailjs.send(emailService, template, templateParams, import.meta.env.VITE_REACT_APP_EMAILJS_USER_ID);
+      await emailjs.send(emailService, template, templateParams, import.meta.env.VITE_REACT_APP_EMAILJS_USER_ID);
       navigate('/order-confirmation'); // Redirection vers la page de confirmation
     } catch (error) {
       console.error('Erreur lors de l\'envoi de l\'e-mail :', error);
@@ -59,7 +59,7 @@ const ConfirmOrder = ({ emailTemplate }) => {
       restaurant_name: restaurantName,
     };
     try {
-      //await emailjs.send(emailService, 's_order_conf', templateParams, import.meta.env.VITE_REACT_APP_EMAILJS_USER_ID);
+      await emailjs.send(emailService, 's_order_conf', templateParams, import.meta.env.VITE_REACT_APP_EMAILJS_USER_ID);
       navigate('/order-confirmation'); // Redirection vers la page de confirmation
     } catch (error) {
       console.error('Erreur lors de l\'envoi de l\'e-mail :', error);

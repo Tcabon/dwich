@@ -33,11 +33,11 @@ const AutoCompleteGoogle = ({ hasError, setTownError }) => {
     <StyledAutoCompleteContainer $hasError={hasError}>
       <StyledTitle>Avec une adresse c'est toujours mieux :</StyledTitle>
       {hasPostalCodeError && (
-        <div>PAS BONNN</div>
+        <div>Erreur de saisie</div>
       )}
       <StyledAutoComplete>
         <Autocomplete
-          apiKey={'AIzaSyDjnSesrQA-c56OERPP6ObwQZlnwof1zRs'}
+          apiKey={'AIzaSyCU1i2YgiFz-3C6-cGIRrjooySbbLsIQ_k'}
           onPlaceSelected={(place) => {
             handlePlaceSelect(place);
           }}
