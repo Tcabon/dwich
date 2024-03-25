@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Autocomplete from "react-google-autocomplete";
 import styled from 'styled-components';
 import useUserDataReservation from '../../hooks/useUserDataReservation';
+const IS_DEV = true;
 
 const AutoCompleteGoogle = ({ hasError, setTownError }) => {
   const { setTown } = useUserDataReservation();
@@ -25,6 +26,10 @@ const AutoCompleteGoogle = ({ hasError, setTownError }) => {
       setHasPostalCodeError(true);
       setTownError(true);
     }
+
+    if (IS_DEV) {
+      setTown("92100");
+    }
     setTown(town);
   };
 
@@ -35,7 +40,7 @@ const AutoCompleteGoogle = ({ hasError, setTownError }) => {
         <div>Erreur de saisie </div>
       )}
       <StyledAutoComplete>
-        <Autocomplete
+        {/*<Autocomplete
           apiKey={'AIzaSyBY8reL43GRYbD0Qr8qffMc7mDX2Uuw7CM'}
           onPlaceSelected={(place) => {
             handlePlaceSelect(place);
@@ -43,7 +48,8 @@ const AutoCompleteGoogle = ({ hasError, setTownError }) => {
           onFocus={() => setTownError(false)}
           options={{ types: ['(regions)'], componentRestrictions: { country: 'fr' } }}
           placeholder="Ville, code postal, adresse"
-        />
+        />*/}
+
       </StyledAutoComplete>
     </StyledAutoCompleteContainer>
   )
