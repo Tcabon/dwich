@@ -33,7 +33,7 @@ const AutoCompleteGoogle = ({ hasError, setTownError }) => {
     <StyledAutoCompleteContainer $hasError={hasError}>
       <StyledTitle>Avec une adresse c'est toujours mieux :</StyledTitle>
       {hasPostalCodeError && (
-        <div>Erreur de saisie</div>
+        <div>Erreur de saisie </div>
       )}
       <StyledAutoComplete>
         <Autocomplete
