@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Autocomplete from "react-google-autocomplete";
 import styled from 'styled-components';
 import useUserDataReservation from '../../hooks/useUserDataReservation';
-import Button from '../common/Button';
 
 const AutoCompleteGoogle = ({ hasError, setTownError }) => {
   const { setTown } = useUserDataReservation();
@@ -37,7 +36,7 @@ const AutoCompleteGoogle = ({ hasError, setTownError }) => {
       )}
       <StyledAutoComplete>
         <Autocomplete
-          apiKey={'AIzaSyCU1i2YgiFz-3C6-cGIRrjooySbbLsIQ_k'}
+          key={'AIzaSyCU1i2YgiFz-3C6-cGIRrjooySbbLsIQ_k'}
           onPlaceSelected={(place) => {
             handlePlaceSelect(place);
           }}
