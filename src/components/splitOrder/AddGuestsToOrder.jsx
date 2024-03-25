@@ -7,9 +7,11 @@ import isCustomEmailValid from "../../methods/isCustomEmailValid";
 import generateUniqueId from "../../methods/generateUniqueId";
 import Button from "../common/Button";
 import crossIcon from '@/assets/icons/crossIcon.png';
+import useUserDataReservation from "../../hooks/useUserDataReservation";
 
 const AddGuestsToOrder = () => {
-  const { guestsList, setGuestsList, guestCount } = useLunch();
+  const { guestsList, setGuestsList } = useLunch();
+  const { guestCount } = useUserDataReservation();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [maximumGuestsError, setMaximumGuestsError] = useState(false);
 

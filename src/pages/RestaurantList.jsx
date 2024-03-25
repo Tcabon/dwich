@@ -58,6 +58,7 @@ function RestaurantList() {
 
 const StyledRestaurantsListPage = styled.div`
   padding: 14px 16px;
+  padding-bottom: 50px;
 `;
 
 const StyledPageHeader = styled.div`

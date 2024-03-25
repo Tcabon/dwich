@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const Button = ({type, action, Display, status }) => {
-  console.log(status);
   return (
     <StyledWrapperButton type={type} onClick={action} $status={status} >
       <Display />

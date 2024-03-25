@@ -1,4 +1,4 @@
-import React, { createContext, useMemo} from "react";
+import React, { createContext, useEffect, useMemo} from "react";
 import useStateStorageWithDefault from "../hooks/useStateStorageWithDefault";
 
 export const LunchContext = createContext();
@@ -6,6 +6,11 @@ export const LunchContext = createContext();
 const LunchContextProvider = ({children}) => {
   const [guestsList, setGuestsList] = useStateStorageWithDefault('sessionGuestsList', []);
   const [guestCount, setGuestCount] = useStateStorageWithDefault('sessionGuestCount', 0);
+
+  /*useEffect (() => {
+    setTransformedCartEntries(transformCartEntries());
+  }, [assignedCartEntries])*/
+
   console.log("guestCount in lunchProvider");
   console.log(guestCount);
   const selectGuestInSplitOrder = (guestId) => {

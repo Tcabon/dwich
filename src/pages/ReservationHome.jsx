@@ -70,7 +70,7 @@ const StyledReservationHome = styled.div`
   margin: 0;
   padding: 0;
   width: 100%;
-  padding-bottom: 180px;
+  padding-bottom: 200px;
 `
 
 const StyledCalendarGridWrapper = styled.div`

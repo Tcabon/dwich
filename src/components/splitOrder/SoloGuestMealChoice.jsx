@@ -57,8 +57,6 @@ const SoloGuestMealChoice = ({guest, assignedCartEntries}) => {
     selectGuestInSplitOrder(guest.userId)
   }; 
 
-  console.log(transformedCartEntries);
-
   return (
     <StyledContentWrapper>
       <StyledTopContent onClick={handleClick} $clicked={guest.isSelected}>

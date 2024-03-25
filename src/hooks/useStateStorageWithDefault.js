@@ -7,7 +7,6 @@ const useStateStorage = (sessionKey, defaultValue) => {
   }, [
     param,
   ]);
-
   return ([param, setParam]);
   
 }

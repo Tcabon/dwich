@@ -79,7 +79,7 @@ function MenuSelection() {
 }
 
 const StyledContentWrapper = styled.div`
-  padding: 14px 16px;
+  padding: 14px 16px 55px; 16px;
 `;
 
 const StyledDishContainer = styled.div`

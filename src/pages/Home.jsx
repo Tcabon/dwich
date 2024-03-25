@@ -31,7 +31,7 @@ const StyledHomeWrapper = styled.div`
 const StyledContentWrapper = styled.div`
   max-width: 800px; /* ou une valeur qui convient à votre mise en page */
   margin: 0 auto; /* Centre le contenu horizontalement */
-  padding: 20px 20px 80px 20px;
+  padding: 20px;
 `;
 
 const StyledCenteredImage = styled.div`

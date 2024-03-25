@@ -136,7 +136,7 @@ const StyledEntryPrice = styled.p`
 
 const StyledButtonContainer = styled.div`
   margin: 16px 0 0 0;
-  padding-bottom: 50px;
+  padding-bottom: 30px;
 `;
 
 export default AssignMealsToGuests;

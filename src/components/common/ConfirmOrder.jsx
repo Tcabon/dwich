@@ -75,7 +75,7 @@ const ConfirmOrder = ({ emailTemplate }) => {
   const confirmOrderDisplay = () => {
     return (
       <div>
-        Payer la totalité
+        Commander
       </div>
     )
   }
@@ -89,7 +89,7 @@ const ConfirmOrder = ({ emailTemplate }) => {
 
 const StyledConfirmOrder = styled.div`
   margin-top: 16px;
-  padding-bottom: 50px;
+  padding-bottom: 40px;
 `
 
 export default ConfirmOrder;
