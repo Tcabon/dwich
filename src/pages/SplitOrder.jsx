@@ -25,7 +25,7 @@ const SplitOrder = () => {
       [...acc, entry]
     )
   }, []),[cartEntries, guestsList])
-  
+
   const addGuestDisplay = () => {
     return (
       <div>
@@ -63,6 +63,8 @@ const SplitOrder = () => {
 };
 
 const StyledSplitOrder = styled.div`
+  max-width: 880px;
+  margin: 0 auto;
   padding: 0 16px;
 `;
 

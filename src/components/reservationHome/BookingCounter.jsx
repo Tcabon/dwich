@@ -24,8 +24,8 @@ const BookingCounter = ({ hasError, setGuestCountError }) => {
         <StyledBookingCounter >
           {guestCountsFields.map(elem => {
             return (
-              <StyledSelectedCount 
-                key={elem.id} 
+              <StyledSelectedCount
+                key={elem.id}
                 onClick={() => handleGuestCountChange(elem)}
                 value={elem.count}
                 className={guestCount.count === elem.count || (guestCount.count > 7 && elem.id === 7)  ? 'selected' : ''}
@@ -59,7 +59,7 @@ const StyledBookingCounter = styled.div`
 
 const StyledSelectedCount = styled.button`
   display: grid;
-  width: 12%;
+  width: 40px;
   aspect-ratio: 1/1;
   place-content: center;
   border-color: #ccc;

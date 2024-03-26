@@ -42,7 +42,7 @@ const ReservationHome = () => {
       navigate(`/restaurants-list/92100`);
     }
   };
-  
+
   return (
     <StyledReservationHome>
       <StyledTitle>Quand voulez vous manger ?</StyledTitle>
@@ -67,9 +67,10 @@ const StyledReservationHome = styled.div`
   background-color: #fff62b;
   height: 106vh;
   flex-direction: column; 
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   width: 100%;
+  max-width: 880px;
   padding-bottom: 200px;
 `
 

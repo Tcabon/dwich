@@ -35,17 +35,19 @@ const StyledRecapBar = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   width: calc(100% - 32px);
+  max-width: 960px;
   height: ${props => props.$expanded ? 'auto' : '50px'};
   min-height: 56px;
   overflow: hidden;
   background-color: #FFF;
   border-radius: 10px 10px 0 0;
   padding: 0 16px;
-  box-shadow: 0px 5px 25px 10px rgba( 0, 0, 0, 0.1);
+  box-shadow: 0 5px 25px 10px rgba( 0, 0, 0, 0.1);
   position: fixed;
   bottom: 0;
-  left: 0;
+  left: 50%;
   z-index: 100;
+  transform: translate(-50%, 0);
   transition: max-height 0.2s cubic-bezier(0.17, 0.67, 0.76, 0.71);
 `;
 

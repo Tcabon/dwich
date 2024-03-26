@@ -24,6 +24,11 @@ const StyledWrapperButton = styled.button`
   box-shadow: 0px 8px 16px rgba(81, 0, 163, 0.3);
   font-size: 1.6em;
   font-weight: 700;
+
+  @media only screen and (min-width: 880px) {
+    max-width: 300px;
+    margin: 0 auto;
+  }
 `;
 
 export default Button;

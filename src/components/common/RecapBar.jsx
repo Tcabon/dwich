@@ -49,6 +49,7 @@ const RecapBar = () => {
 const StyledRecapBar = styled.div`
   display: flex;
   width: 100%;
+  max-width: 960px;
   flex-direction: column;
   justify-content: flex-start;
   max-height: ${props => props.$expanded ? '300px' : '50px'};
@@ -56,9 +57,9 @@ const StyledRecapBar = styled.div`
   border-radius: 10px 10px 0 0;
   position: fixed;
   bottom: 0;
-  left: 0;
   z-index: 100;
-  background-color: #FFF;
+  left: 50%;
+  transform: translate(-50%, 0);
   transition: max-height 0.2s cubic-bezier(0.17, 0.67, 0.76, 0.71);
 `;
 

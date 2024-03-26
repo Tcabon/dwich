@@ -10,7 +10,7 @@ import backArrow from '@/assets/icons/backArrow.png';
 
 function MenuSelection() {
   const { cartEntries, addToCart, total, CartEntries } = useCart();
-  
+
   const navigate = useNavigate();
 
   const handlePreviousButtonClick = () => {
@@ -79,7 +79,9 @@ function MenuSelection() {
 }
 
 const StyledContentWrapper = styled.div`
-  padding: 14px 16px 55px; 16px;
+  padding: 14px 16px 55px 16px;
+  max-width: 880px;
+  margin: 0 auto;
 `;
 
 const StyledDishContainer = styled.div`

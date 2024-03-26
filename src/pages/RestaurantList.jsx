@@ -3,12 +3,11 @@ import Restaurant from '@/components/restaurantList/Restaurant';
 import RecapBar from '@/components/common/RecapBar';
 import styled from 'styled-components';
 import {useParams} from "react-router-dom";
-import useUserDataReservation from '@/hooks/useUserDataReservation';
 import { useNavigate } from 'react-router-dom';
 import backArrow from '@/assets/icons/backArrow.png';
 
 function RestaurantList() {
-  const { postalCode } = useParams(); 
+  const { postalCode } = useParams();
   const navigate = useNavigate();
 
   const restaurants = [
@@ -16,7 +15,9 @@ function RestaurantList() {
     { id: 2, name: 'Les patapoufs', description: 'Restaurant pour grandes poufs', postalCodes: ["75015", "75007"]  },
     { id: 3, name: 'Les pataniais', description: 'Restaurant pour les niais', postalCodes: ["75116", "92200"] },
     { id: 4, name: 'Le Limmeuillois', description: 'Restaurant Portugais', postalCodes: ["24510"] },
-    { id: 5, name: "Au délice d'Istanbul", description: 'Restaurant Turque', postalCodes: ["92100"]}
+    { id: 5, name: "Au délice d'Istanbul", description: 'Restaurant Turque', postalCodes: ["92100"] },
+    { id: 6, name: 'Les autres patapons', description: 'Restaurant pour petits cons avec une description plus longue mais vraiment relou du coup', postalCodes: ["75016", "92100"] },
+    { id: 7, name: 'Les autres patapons', description: 'Restaurant pour petits cons avec une description plus longue mais vraiment relou du coup', postalCodes: ["75016", "92100"] },
   ];
 
   const filteredRestaurants = restaurants.filter(restaurant => restaurant.postalCodes.includes(postalCode));
@@ -52,13 +53,16 @@ function RestaurantList() {
       )}
       <RecapBar />
     </StyledRestaurantsListPage>
-    
+
   );
 }
 
 const StyledRestaurantsListPage = styled.div`
   padding: 14px 16px;
   padding-bottom: 50px;
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
 `;
 
 const StyledPageHeader = styled.div`
