@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import useUserDataReservation from '../../hooks/useUserDataReservation';
@@ -15,57 +15,61 @@ const hours = [
 ];
 
 const ContinueDisplay = () => {
-  return (
-    <div>
-      Continuer
-    </div>
-  )
+    return (
+        <div>
+            Continuer
+        </div>
+    )
 };
 
 const Restaurant = ({ id, name, description }) => {
-  const { setDinnerHour, setRestaurantName } = useUserDataReservation();
-  const [selectedHour, setSelectedHour] = useState(null);
-  const navigate = useNavigate();
+    const { dinnerHour, setDinnerHour, restaurantName, setRestaurantName } = useUserDataReservation();
+    const [selectedHour, setSelectedHour] = useState(null);
+    const navigate = useNavigate();
 
-  const handleDinnerHour = (hour) => {
-    setDinnerHour(hour.hour);
-    setSelectedHour(hour.id);
-    setRestaurantName(name);
-  }
-
-  const handleReservation = () => {
-    if (selectedHour !== null) {
-      navigate(`/menu/${id}/${name}`);
-    } else {
-      alert("Veuillez sélectionner une heure avant de réserver.");
-    }
-  }
-
-  return (
-    <StyledRestaurantContainer>
-      <StyledImageContainer />
-      <StyledRestaurantInfo>
-        <StyledName>{name}</StyledName>
-        <StyledDescription>{description}</StyledDescription>
-      </StyledRestaurantInfo>
-      <StyledDatepicker>
-        {hours.map(hour => (
-          <StyledDateButton
-            key={hour.id}
-            onClick={() => handleDinnerHour(hour)}
-            className={selectedHour === hour.id ? 'selected' : ''}
-          >
-            {hour.hour}
-          </StyledDateButton>
-        ))}
-      </StyledDatepicker>
-        {
-            selectedHour !== null && (
-                <Button action={handleReservation} Display={ContinueDisplay} />
-            )
+    useEffect(() => {
+        if (selectedHour !== null && restaurantName !== name) {
+            setSelectedHour(null);
         }
-    </StyledRestaurantContainer>
-  );
+    }, [restaurantName]);
+
+    const handleDinnerHour = (hour) => {
+        setDinnerHour(hour.hour);
+        setSelectedHour(hour.id);
+        setRestaurantName(name);
+    }
+
+    const handleReservation = () => {
+        if (selectedHour !== null) {
+            navigate(`/menu/${id}/${name}`);
+        } else {
+            alert("Veuillez sélectionner une heure avant de réserver.");
+        }
+    }
+
+    return (
+        <StyledRestaurantContainer>
+            <StyledImageContainer />
+            <StyledRestaurantInfo>
+                <StyledName>{name}</StyledName>
+                <StyledDescription>{description}</StyledDescription>
+            </StyledRestaurantInfo>
+            <StyledDatepicker>
+                {hours.map(hour => (
+                    <StyledDateButton
+                        key={hour.id}
+                        onClick={() => handleDinnerHour(hour)}
+                        className={selectedHour === hour.id ? 'selected' : ''}
+                    >
+                        {hour.hour}
+                    </StyledDateButton>
+                ))}
+            </StyledDatepicker>
+            { selectedHour !== null && restaurantName === name && (
+                <Button action={handleReservation} Display={ContinueDisplay} />
+            )}
+        </StyledRestaurantContainer>
+    );
 }
 
 const StyledRestaurantContainer = styled.div`

@@ -30,52 +30,69 @@ const ConfirmOrder = ({ emailTemplate }) => {
         return (`<p>${el.name}</p>`)
       })
       return (`<div><p>${elem.name} - ${elem.email}</p> <div>${formattedCartEntries}</div></div>`)
-    
+
     }).join("");
     return (res);
   };
 
+
+  const emailData = {
+    toEmail: 'app.dwich@gmail.com',
+    toName: 'Recipient Name',
+    fromEmail: 'app.dwich@gmail.com',
+    fromName: 'Sender Name',
+    subject: 'Test Email from Vite App',
+    textPart: 'This is a plain text part of the email.',
+    htmlPart: '<p>This is a <strong>HTML</strong> part of the email.</p>',
+  };
+
   const handleServiceConfirmOrder = async () => {
     guestsListFormatter();
-    const templateParams = {
-      to_email: 'app.dwich@gmail.com',
-      total_amount: totalAmount,
-      cart_items: JSON.stringify(cartEntries),
-      guests_list: JSON.stringify(guestsList),
-      date: selectedDate,
-      guest_count: guestCount.label,
-      town,
-      dinner_hour: dinnerHour,
-      restaurant_name: restaurantName,
-    };
-    console.log(templateParams);
 
     try {
-      await emailjs.send(emailService, template, templateParams, import.meta.env.VITE_REACT_APP_EMAILJS_USER_ID);
-      navigate('/order-confirmation');
+      const response = await fetch('http://localhost:3000/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(emailData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send email');
+      }
+
+      const responseData = await response.json();
+      navigate('/order-confirmation'); // Redirection vers la page de confirmation
+
+      console.log('Email sent successfully:', responseData);
     } catch (error) {
-      console.error('Erreur lors de l\'envoi de l\'e-mail :', error);
+      console.error('Error sending email:', error);
     }
   };
 
   const handleUserConfirmOrder = async () => {
     const hostEmail = guestsList.find(elem => elem.isHost === true).email;
-    const templateParams = {
-      to_email: hostEmail,
-      total_amount: totalAmount,
-      cart_items: JSON.stringify(cartEntries),
-      guests_list: JSON.stringify(guestsList),
-      date: selectedDate,
-      guest_count: guestCount.label,
-      town,
-      dinner_hour: dinnerHour,
-      restaurant_name: restaurantName,
-    };
+
     try {
-      //await emailjs.send(emailService, 's_order_conf', templateParams, import.meta.env.VITE_REACT_APP_EMAILJS_USER_ID);
+      const response = await fetch('http://localhost:3000/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(emailData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send email');
+      }
+
+      const responseData = await response.json();
       navigate('/order-confirmation'); // Redirection vers la page de confirmation
+
+      console.log('Email sent successfully:', responseData);
     } catch (error) {
-      console.error('Erreur lors de l\'envoi de l\'e-mail :', error);
+      console.error('Error sending email:', error);
     }
   }
 
