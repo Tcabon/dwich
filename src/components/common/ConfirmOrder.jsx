@@ -24,7 +24,19 @@ const ConfirmOrder = ({ emailTemplate }) => {
   const template = emailTemplate;
   const emailService = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 
+  const guestsListFormatter = () => {
+    const res = guestsList.map((elem) => {
+      const formattedCartEntries = elem.assignedCartEntries.map((el) => {
+        return (`<p>${el.name}</p>`)
+      })
+      return (`<div><p>${elem.name} - ${elem.email}</p> <div>${formattedCartEntries}</div></div>`)
+    
+    }).join("");
+    return (res);
+  };
+
   const handleServiceConfirmOrder = async () => {
+    guestsListFormatter();
     const templateParams = {
       to_email: 'app.dwich@gmail.com',
       total_amount: totalAmount,
@@ -36,10 +48,11 @@ const ConfirmOrder = ({ emailTemplate }) => {
       dinner_hour: dinnerHour,
       restaurant_name: restaurantName,
     };
+    console.log(templateParams);
 
     try {
       await emailjs.send(emailService, template, templateParams, import.meta.env.VITE_REACT_APP_EMAILJS_USER_ID);
-      navigate('/order-confirmation'); // Redirection vers la page de confirmation
+      navigate('/order-confirmation');
     } catch (error) {
       console.error('Erreur lors de l\'envoi de l\'e-mail :', error);
     }
@@ -59,7 +72,7 @@ const ConfirmOrder = ({ emailTemplate }) => {
       restaurant_name: restaurantName,
     };
     try {
-      await emailjs.send(emailService, 's_order_conf', templateParams, import.meta.env.VITE_REACT_APP_EMAILJS_USER_ID);
+      //await emailjs.send(emailService, 's_order_conf', templateParams, import.meta.env.VITE_REACT_APP_EMAILJS_USER_ID);
       navigate('/order-confirmation'); // Redirection vers la page de confirmation
     } catch (error) {
       console.error('Erreur lors de l\'envoi de l\'e-mail :', error);
