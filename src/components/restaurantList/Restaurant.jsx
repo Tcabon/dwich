@@ -42,8 +42,6 @@ const Restaurant = ({ id, name, description }) => {
     const handleReservation = () => {
         if (selectedHour !== null) {
             navigate(`/menu/${id}/${name}`);
-        } else {
-            alert("Veuillez sélectionner une heure avant de réserver.");
         }
     }
 
