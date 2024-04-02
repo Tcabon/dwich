@@ -11,7 +11,6 @@ function OrderConfirmation() {
   const { dinnerHour, handleResetDataReservation } = useUserDataReservation();
 
   const handleClick = () => {
-    console.log('salut');
     handleResetDataReservation();
     navigate('/');
   };
