@@ -6,6 +6,8 @@ import useUserDataReservation from "../../hooks/useUserDataReservation";
 import { useNavigate } from 'react-router-dom';
 import useLunch from "../../hooks/useLunch";
 import Button from "./Button";
+import { format } from "date-fns";
+import { fr } from 'date-fns/locale';
 
 const ConfirmOrder = ({ emailTemplate }) => {
   const { cartEntries, total } = useCart();
@@ -18,6 +20,10 @@ const ConfirmOrder = ({ emailTemplate }) => {
     handleResetDataReservation,
   } = useUserDataReservation();
 
+  const selectedDateFormated = format(selectedDate, 'dd MMMMMMMMM yyyy', {locale:fr})
+  console.log("client");
+  console.log(selectedDateFormated);
+  console.log(guestCount);
   const { guestsList } = useLunch();
   const totalAmount = total;
   const navigate = useNavigate();
@@ -34,14 +40,22 @@ const ConfirmOrder = ({ emailTemplate }) => {
     return (res);
   };
 
+  const formatSelectedPlates = (plates) => {
+    return plates.map(plate => `<li>${plate.name} - ${plate.price} €</li>`).join('');
+  };
 
   const emailData = {
     toEmail: 'app.dwich@gmail.com',
     toName: 'Recipient Name',
     fromEmail: 'app.dwich@gmail.com',
     fromName: 'Sender Name',
-    subject: 'Test Email from Vite App',
-    htmlPart: '<p>This is a <strong>HTML</strong> part of the email.</p>',
+    subject: 'Récapitulatif de votre commande',
+    selectedDateFormated,
+    guestCount,
+    town,
+    dinnerHour,
+    restaurantName,
+    cartEntries,
   };
 
   const handleServiceConfirmOrder = async () => {
