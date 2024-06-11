@@ -31,9 +31,6 @@ const AddGuestsToOrder = () => {
   };
 
   const handleAddGuest = (data) => {
-    console.log(maximumGuestsError);
-    console.log(guestsList.length);
-    console.log(guestCount.count);
     if (guestsList.length === guestCount.count) {
       setMaximumGuestsError(true);
       console.log(maximumGuestsError);

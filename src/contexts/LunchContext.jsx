@@ -11,8 +11,6 @@ const LunchContextProvider = ({children}) => {
     setTransformedCartEntries(transformCartEntries());
   }, [assignedCartEntries])*/
 
-  console.log("guestCount in lunchProvider");
-  console.log(guestCount);
   const selectGuestInSplitOrder = (guestId) => {
     setGuestsList(guestsList.map(guest => (
       {...guest, isSelected: guest.userId === guestId ? true : false }

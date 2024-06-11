@@ -1,20 +1,17 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import MenuItem from '../components/menuSelection/MenuItem';
-import Total from '../components/menuSelection/Total';
 import RecapPlats from '../components/common/RecapPlats';
 import useCart from '../hooks/useCart';
 import styled from 'styled-components';
 import backArrow from '@/assets/icons/backArrow.png';
+import useGoBack from '@/hooks/useGoBack';
 
 function MenuSelection() {
-  const { cartEntries, addToCart, total, CartEntries } = useCart();
-
-  const navigate = useNavigate();
+  const { addToCart } = useCart();
+  const goBack = useGoBack();
 
   const handlePreviousButtonClick = () => {
-    navigate(-1);
+    goBack();
   };
 
   // Simulons des éléments de menu pour la démonstration

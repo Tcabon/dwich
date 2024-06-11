@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import useUserDataReservation from "@/hooks/useUserDataReservation";
 import styled from 'styled-components';
 import confirmOrderImage from '@/assets/images/confirmOrderImage.png';
-import thumbsCircleImage from '@/assets/images/thumbsCircleImage.png';
 import Button from '@/components/common/Button';
 
 function OrderConfirmation() {

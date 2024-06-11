@@ -2,20 +2,20 @@ import React from 'react';
 import Restaurant from '@/components/restaurantList/Restaurant';
 import RecapBar from '@/components/common/RecapBar';
 import styled from 'styled-components';
-import {useParams} from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import backArrow from '@/assets/icons/backArrow.png';
+import useGoBack from '@/hooks/useGoBack';
 
 function RestaurantList() {
   const { postalCode } = useParams();
-  const navigate = useNavigate();
+  const goBack = useGoBack();
 
   const restaurants = [
     { id: 1, name: 'Les patapons', description: 'Restaurant pour petits cons avec une description plus longue', postalCodes: ["75016", "92100"] },
     { id: 2, name: 'Les patapoufs', description: 'Restaurant pour grandes poufs', postalCodes: ["75015", "75007"]  },
     { id: 3, name: 'Les pataniais', description: 'Restaurant pour les niais', postalCodes: ["75116", "92200"] },
     { id: 4, name: 'Le Limmeuillois', description: 'Restaurant Portugais', postalCodes: ["24510"] },
-    { id: 5, name: "Au délice d'Istanbul", description: 'Restaurant Turque', postalCodes: ["92100"] },
+    { id: 5, name: 'Au délice d\'Istanbul', description: 'Restaurant Turque', postalCodes: ["92100"] },
     { id: 6, name: 'Les autres patapons', description: 'Restaurant pour petits cons avec une description plus longue mais vraiment relou du coup', postalCodes: ["75016", "92100"] },
     { id: 7, name: 'Les autres patapons', description: 'Restaurant pour petits cons avec une description plus longue mais vraiment relou du coup', postalCodes: ["75016", "92100"] },
   ];
@@ -23,7 +23,7 @@ function RestaurantList() {
   const filteredRestaurants = restaurants.filter(restaurant => restaurant.postalCodes.includes(postalCode));
 
   const handlePreviousButtonClick = () => {
-    navigate(-1);
+    goBack();
   };
 
   return (
@@ -58,9 +58,9 @@ function RestaurantList() {
 }
 
 const StyledRestaurantsListPage = styled.div`
-  padding: 14px 16px;
+  padding: 14px 16px 14px 16px;
   padding-bottom: 50px;
-  width: 100%;
+  width: calc(100% - 32px);
   max-width: 880px;
   margin: 0 auto;
 `;

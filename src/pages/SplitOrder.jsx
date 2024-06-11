@@ -10,12 +10,13 @@ import Button from "../components/common/Button";
 import GuestMealChoice from "../components/splitOrder/GuestMealChoice";
 import useLunch from "../hooks/useLunch";
 import backArrow from '@/assets/icons/backArrow.png';
+import useGoBack from "@/hooks/useGoBack";
 
 const SplitOrder = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { cartEntries } = useCart();
   const { guestsList } = useLunch();
-  const navigate = useNavigate();
+  const goBack = useGoBack();
 
   const assignedCartEntries = useMemo(() => cartEntries.reduce((acc, entry) => {
     if (guestsList.some((guest) => guest.assignedCartEntries.some((item) => item.cartEntryId === entry.cartEntryId))) {
@@ -35,7 +36,7 @@ const SplitOrder = () => {
   };
 
   const handlePreviousButtonClick = () => {
-    navigate(-1);
+    goBack();
   };
 
   return (
@@ -56,7 +57,7 @@ const SplitOrder = () => {
       <ModalToaster title="Inviter quelqu'un" content={AddGuestsToOrder} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       <AssignMealsToGuests assignedCartEntries={assignedCartEntries} />
       {assignedCartEntries && assignedCartEntries.length == 0 && (
-        <ConfirmOrder emailTemplate='s_order_conf_multi' />
+        <ConfirmOrder />
       )}
     </StyledSplitOrder>
   )
