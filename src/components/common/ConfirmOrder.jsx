@@ -36,7 +36,7 @@ const ConfirmOrder = () => {
     toEmail: 'app.dwich@gmail.com',
     toName: 'Recipient Name',
     fromEmail: 'app.dwich@gmail.com',
-    fromName: 'Sender Name',
+    fromName: 'l\'équipe Dwich',
     subject: 'Récapitulatif de votre commande',
     selectedDateFormated,
     guestCount,

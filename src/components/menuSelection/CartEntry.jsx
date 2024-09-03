@@ -5,10 +5,10 @@ const CartEntry = ({ entry }) => {
   const singleItemTotal = entry.quantity * entry.price;
   return (
     <StyledLi>
-        <StyledSingleItemQuantity>{entry.quantity}x</StyledSingleItemQuantity>
-        <StyledSingleItemName>{entry.name}</StyledSingleItemName> 
-        <StyledSingleItemPrice>{entry.price} €</StyledSingleItemPrice>
-        <StyledSingleItemTotal>{singleItemTotal}€</StyledSingleItemTotal>
+      <StyledSingleItemQuantity>{entry.quantity}x</StyledSingleItemQuantity>
+      <StyledSingleItemName>{entry.name}</StyledSingleItemName> 
+      <StyledSingleItemPrice>{entry.price} €</StyledSingleItemPrice>
+      <StyledSingleItemTotal>{singleItemTotal}€</StyledSingleItemTotal>
     </StyledLi> 
   );
 }

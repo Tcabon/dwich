@@ -35,7 +35,7 @@ function Total({ cart, total }) {
         {guestCount.count > 1 && (
           <Button action={handleSplitOrder} Display={splitOrderDisplay}/>
         )}
-        <ConfirmOrder emailTemplate='s_order_conf' />
+        <ConfirmOrder />
       </StyledButtonsWrapper>
     </StyledTotalWrapper>
   );

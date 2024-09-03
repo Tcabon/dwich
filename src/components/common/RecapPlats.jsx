@@ -19,12 +19,10 @@ const RecapPlats = () => {
         <StyledToggleArrow $expanded={expanded}><StyledArrowIcon src={backArrow} /></StyledToggleArrow>
       </StyledRecapHead>
       {expanded && (
-        <>
-          <StyledInfos>
-            <CartEntries/>
-            <Total cart={cartEntries} total={total}/>
-          </StyledInfos>
-        </>
+        <StyledInfos>
+          <CartEntries/>
+          <Total cart={cartEntries} total={total}/>
+        </StyledInfos>
       )}
     </StyledRecapBar>
   );
